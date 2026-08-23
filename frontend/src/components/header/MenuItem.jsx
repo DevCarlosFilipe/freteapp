@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom'
 
 function MenuItem({ label, link }) {
     function getLinkClassName({ isActive }) {
-        return `nav-link px-2${isActive ? ' active' : ''}`
+        return `nav-link px-3${isActive ? ' active' : ''}`
     }
 
     return (

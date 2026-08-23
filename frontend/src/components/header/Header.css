@@ -1,6 +1,5 @@
 .header {
     background-color: #1b2023;
-    padding: 1rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -12,6 +11,36 @@
 .header-content {
     max-width: 1200px;
     margin: auto;
+}
+
+.navbar-expand-lg {
+    padding: 15px 0;
+}
+
+.logo-container {
+    flex-shrink: 0;
+}
+
+.navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.35);
+}
+
+.navbar-toggler:focus {
+    box-shadow: 0 0 0 0.2rem rgba(50, 157, 61, 0.35);
+}
+
+.navbar-collapse {
+    align-items: center;
+}
+
+@media (max-width: 991.98px) {
+    .navbar-collapse {
+        padding-top: 1rem;
+    }
+
+    .user-space {
+        margin-top: 0.5rem;
+    }
 }
 
 .menu-item>.nav-link {
