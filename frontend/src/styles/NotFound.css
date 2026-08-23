@@ -1,0 +1,121 @@
+.not-found {
+    position: relative;
+    display: grid;
+    box-sizing: border-box;
+    min-height: 100vh;
+    place-items: center;
+    overflow: hidden;
+    padding: 3rem 1.5rem;
+    isolation: isolate;
+    background:
+        radial-gradient(circle at 15% 20%, rgba(240, 180, 78, 0.18), transparent 28%),
+        linear-gradient(135deg, #f7f3ea 0%, #e7eef0 100%);
+    color: #1b2023;
+}
+
+.not-found::before,
+.not-found::after {
+    position: absolute;
+    z-index: -1;
+    display: block;
+    border: 1px solid rgba(27, 32, 35, 0.12);
+    content: '';
+    transform: rotate(45deg);
+}
+
+.not-found::before {
+    width: 18rem;
+    height: 18rem;
+    right: -5rem;
+    top: 8%;
+}
+
+.not-found::after {
+    width: 11rem;
+    height: 11rem;
+    bottom: -3rem;
+    left: 10%;
+}
+
+.not-found__content {
+    max-width: 32rem;
+    text-align: center;
+}
+
+.not-found__eyebrow {
+    margin: 0 0 0.75rem;
+    color: #b46f18;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.not-found h1 {
+    margin: 0;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    line-height: 1.05;
+}
+
+.not-found__message {
+    margin: 1rem auto 1.75rem;
+    max-width: 26rem;
+    color: #536066;
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+
+.not-found__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    min-height: 2.9rem;
+    padding: 0.75rem 1.2rem;
+    border-radius: 0.4rem;
+    background-color: #1b2023;
+    color: #fff;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background-color 160ms ease, transform 160ms ease;
+}
+
+.not-found__link:hover,
+.not-found__link:focus-visible {
+    background-color: #b46f18;
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+.not-found__link:focus-visible {
+    outline: 3px solid rgba(180, 111, 24, 0.35);
+    outline-offset: 3px;
+}
+
+.not-found__number {
+    position: absolute;
+    z-index: -1;
+    right: 5%;
+    bottom: 3%;
+    color: rgba(27, 32, 35, 0.05);
+    font-size: clamp(8rem, 28vw, 23rem);
+    font-weight: 900;
+    line-height: 0.8;
+    user-select: none;
+}
+
+@media (max-width: 480px) {
+    .not-found {
+        min-height: 100vh;
+    }
+
+    .not-found__number {
+        right: -5%;
+        bottom: 8%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .not-found__link {
+        transition: none;
+    }
+}

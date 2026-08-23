@@ -1,10 +1,11 @@
+import MenuItem from './MenuItem'
 
 function Menu () {
     return (
-        <ul className="menu">
-            <li><a href="/">Home</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="/contact">Contact</a></li>
+        <ul className="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+            <MenuItem label="Home" link="/" />
+            <MenuItem label="About" link="/about" />
+            <MenuItem label="Contact" link="/contact" />
         </ul>
     )
 }
