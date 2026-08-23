@@ -1,0 +1,45 @@
+.app-action-button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 2.5rem;
+	padding: 0.65rem 1.1rem;
+	border: 1px solid #329d3d;
+	background-color: #329d3d;
+	color: #fff;
+	font: inherit;
+	font-weight: 500;
+	line-height: 0.2;
+	text-decoration: none;
+	cursor: pointer;
+	transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease, transform 160ms ease;
+}
+
+.app-action-button:hover,
+.app-action-button:focus-visible {
+	border-color: #287c31;
+	background-color: #287c31;
+	color: #fff;
+}
+
+.app-action-button:focus-visible {
+	outline: 3px solid rgba(50, 157, 61, 0.3);
+	outline-offset: 3px;
+}
+
+.app-action-button--outline {
+	background-color: transparent;
+	color: #329d3d;
+}
+
+.app-action-button--outline:hover,
+.app-action-button--outline:focus-visible {
+	background-color: #329d3d;
+	color: #fff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.app-action-button {
+		transition: none;
+	}
+}

@@ -1,9 +1,15 @@
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 function MenuItem({ label, link }) {
+    function getLinkClassName({ isActive }) {
+        return `nav-link px-2${isActive ? ' active' : ''}`
+    }
+
     return (
         <li className="menu-item">
-            <Link className="nav-link px-2" to={link}>{label}</Link>
+            <NavLink className={getLinkClassName} end={link === '/'} to={link}>
+                {label}
+            </NavLink>
         </li>
     )
 }

@@ -15,6 +15,14 @@
 }
 
 .menu-item>.nav-link {
-    color: #eee;
-    font-weight: 600;
+    color: #fff;
+    font-weight: 500;
+}
+
+.menu-item>.nav-link:hover {
+    color: #cacbcc;
+}
+
+.menu-item>.nav-link.active {
+    color: #329d3d;
 }

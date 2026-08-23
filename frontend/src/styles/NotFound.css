@@ -66,29 +66,7 @@
 }
 
 .not-found__link {
-    display: inline-flex;
-    align-items: center;
     gap: 0.6rem;
-    min-height: 2.9rem;
-    padding: 0.75rem 1.2rem;
-    border-radius: 0.4rem;
-    background-color: #1b2023;
-    color: #fff;
-    font-weight: 700;
-    text-decoration: none;
-    transition: background-color 160ms ease, transform 160ms ease;
-}
-
-.not-found__link:hover,
-.not-found__link:focus-visible {
-    background-color: #b46f18;
-    color: #fff;
-    transform: translateY(-2px);
-}
-
-.not-found__link:focus-visible {
-    outline: 3px solid rgba(180, 111, 24, 0.35);
-    outline-offset: 3px;
 }
 
 .not-found__number {
@@ -114,8 +92,3 @@
     }
 }
 
-@media (prefers-reduced-motion: reduce) {
-    .not-found__link {
-        transition: none;
-    }
-}

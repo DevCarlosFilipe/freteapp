@@ -10,7 +10,7 @@ function NotFound() {
                 <p className="not-found__message">
                     O endereço que você acessou não existe ou foi movido.
                 </p>
-                <Link className="not-found__link" to="/">
+                <Link className="app-action-button not-found__link" to="/">
                     Voltar para a página inicial <span aria-hidden="true">&#8594;</span>
                 </Link>
             </div>
