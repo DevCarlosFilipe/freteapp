@@ -1,0 +1,42 @@
+.section {
+    padding: clamp(3rem, 3vw, 8rem) max(1.5rem, calc((100% - 1200px) / 2));
+}
+
+.section>h3 {
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+}
+
+.content {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.arrow {
+    color: #329d3d;
+    flex: 0 0 auto;
+    font-size: 2rem;
+}
+
+@media (max-width: 768px) {
+    .arrow {
+        display: none;
+    }
+}
+
+.white {
+	background-color: white;
+}
+
+.black {
+	background-color: #171c1f;
+    color: white;
+}
+
+.gray {
+	background-color: #f7f7f7;
+}

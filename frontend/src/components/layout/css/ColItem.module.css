@@ -1,0 +1,36 @@
+.item {
+	align-items: flex-start;
+	display: flex;
+	gap: 10px;
+	max-width: 205px;
+    margin-top: 25px;
+}
+
+.icon {
+	color: #329d3d;
+	flex: 0 0 auto;
+	font-size: 40px;
+	line-height: 1;
+}
+
+.text {
+	flex: 1;
+	padding-top: 2px;
+}
+
+.text h3,
+.text p {
+	margin: 0;
+}
+
+.text h3 {
+	font-size: 17px;
+	font-weight: 700;
+	line-height: 1.2;
+}
+
+.text p {
+	font-size: 15px;
+	line-height: 1.35;
+	margin-top: 8px;
+}
