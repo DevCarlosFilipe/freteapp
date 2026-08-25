@@ -43,15 +43,15 @@
     }
 }
 
-.menu-item>.nav-link {
+.menu-item > .nav-link {
     color: #fff;
     font-weight: 500;
 }
 
-.menu-item>.nav-link:hover {
+.menu-item > .nav-link:hover {
     color: #cacbcc;
 }
 
-.menu-item>.nav-link.active {
+.menu-item > .nav-link.active {
     color: #329d3d;
 }

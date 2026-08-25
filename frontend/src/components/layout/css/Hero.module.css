@@ -1,0 +1,160 @@
+.hero {
+	min-height: min(700px, calc(100vh - 76px));
+	background-color: #17221d;
+	background-image: url('../../../assets/img/heroIMG.png');
+	background-position: center;
+	background-size: cover;
+	color: #fff;
+}
+
+.greenTitle {
+    color: #55d563;
+	display: block;
+}
+
+.overlay {
+	display: flex;
+	min-height: inherit;
+	align-items: center;
+	padding: clamp(4rem, 10vw, 8rem) max(1.5rem, calc((100% - 1200px) / 2));
+	background: linear-gradient(90deg, rgba(8, 16, 12, 0.88) 0%, rgba(8, 16, 12, 0.62) 38%, rgba(8, 16, 12, 0.08) 78%);
+}
+
+.content {
+	width: 100%;
+	max-width: 560px;
+	min-width: 0;
+}
+
+.eyebrow {
+	margin: 0 0 1rem;
+	color: #55d563;
+	font-size: 0.8rem;
+	font-weight: 700;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+}
+
+.content h1 {
+	margin: 0;
+	font-size: clamp(1.25rem, 6vw, 5.25rem);
+	line-height: 0.98;
+	text-transform: uppercase;
+}
+
+.description {
+	max-width: 480px;
+	margin: 1.5rem 0 0;
+	color: #e1e8e3;
+	font-size: clamp(1rem, 2vw, 1.25rem);
+	line-height: 1.55;
+}
+
+.actions {
+	display: flex;
+	flex-wrap: nowrap;
+	gap: 1rem;
+	margin-top: 2.5rem;
+}
+
+.action {
+	display: flex;
+	min-width: 300px;
+	align-items: center;
+	gap: 0.9rem;
+	padding: 1rem 1.25rem;
+	border: 1px solid transparent;
+	color: #fff;
+	text-decoration: none;
+	transition: transform 160ms ease, background-color 160ms ease, border-color 160ms ease;
+}
+
+.action:hover,
+.action:focus-visible {
+	color: #fff;
+	transform: translateY(-2px);
+}
+
+.action:focus-visible {
+	outline: 3px solid rgba(85, 213, 99, 0.65);
+	outline-offset: 3px;
+}
+
+.actionPrimary {
+	background-color: #2fbd4b;
+}
+
+.actionPrimary:hover,
+.actionPrimary:focus-visible {
+	background-color: #24983b;
+}
+
+.actionSecondary {
+	border-color: rgba(255, 255, 255, 0.35);
+	background-color: rgba(18, 28, 24, 0.72);
+}
+
+.actionSecondary:hover,
+.actionSecondary:focus-visible {
+	border-color: #55d563;
+	background-color: rgba(18, 28, 24, 0.92);
+}
+
+.actionIcon {
+	display: grid;
+	width: 2.5rem;
+	height: 2.5rem;
+	flex: 0 0 2.5rem;
+	place-items: center;
+	font-size: 1.5rem;
+	line-height: 1;
+}
+
+.action strong,
+.action small {
+	display: block;
+}
+
+.action strong {
+	font-size: 1rem;
+	text-transform: uppercase;
+}
+
+.action small {
+	margin-top: 0.25rem;
+	color: #d1ded3;
+	font-size: 0.75rem;
+}
+
+@media (max-width: 640px) {
+	.hero {
+		min-height: calc(100vh - 70px);
+		background-position: 65% center;
+	}
+
+	.overlay {
+		align-items: flex-end;
+		padding: 4rem 1.25rem 3rem;
+		background: linear-gradient(0deg, rgba(8, 16, 12, 0.95) 0%, rgba(8, 16, 12, 0.55) 65%, rgba(8, 16, 12, 0.15) 100%);
+	}
+
+	.actions {
+		flex-direction: column;
+		width: 100%;
+		gap: 0.75rem;
+		margin-top: 2rem;
+	}
+
+	.action {
+		box-sizing: border-box;
+		width: 100%;
+		min-width: 0;
+	}
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.action {
+		transition: none;
+	}
+}

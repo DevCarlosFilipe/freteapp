@@ -1,5 +1,4 @@
-// css
-import './Header.css'
+import './css/Header.css'
 import Logo from './Logo'
 import Menu from './Menu'
 import UserSpace from './UserSpace'
@@ -7,7 +6,7 @@ import UserSpace from './UserSpace'
 function Header() {
     return (
         <header className="header">
-            <nav className="navbar navbar-expand-lg navbar-dark">
+            <nav className="navbar-expand-lg navbar navbar-dark">
                 <div className="container-fluid header-content">
                     <Logo img="/white-logo.png" siteName="FreteApp" />
                     <button
