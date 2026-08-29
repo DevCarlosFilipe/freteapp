@@ -1,5 +1,5 @@
 .header {
-    background-color: #1b2023;
+    background-color: var(--color-black);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     position: sticky;
     top: 0;

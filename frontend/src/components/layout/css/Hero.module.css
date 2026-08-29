@@ -1,6 +1,6 @@
 .hero {
 	min-height: min(700px, calc(100vh - 76px));
-	background-color: #17221d;
+	background-color: var(--color-black);
 	background-image: url('../../../assets/img/heroIMG.png');
 	background-position: center;
 	background-size: cover;
@@ -81,12 +81,12 @@
 }
 
 .actionPrimary {
-	background-color: #2fbd4b;
+	background-color: var(--color-green);
 }
 
 .actionPrimary:hover,
 .actionPrimary:focus-visible {
-	background-color: #24983b;
+	background-color: var(--color-green);
 }
 
 .actionSecondary {
@@ -96,8 +96,8 @@
 
 .actionSecondary:hover,
 .actionSecondary:focus-visible {
-	border-color: #55d563;
-	background-color: rgba(18, 28, 24, 0.92);
+	border-color: var(--color-green);
+	background-color: rgba(23, 28, 31, 0.92);
 }
 
 .actionIcon {
@@ -128,7 +128,7 @@
 
 @media (max-width: 640px) {
 	.hero {
-		min-height: calc(100vh - 70px);
+		min-height: calc(90vh - 120px);
 		background-position: 65% center;
 	}
 

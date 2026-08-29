@@ -1,6 +1,6 @@
 .card {
     background-color: #fff;
-    border: 1px solid #ececec;
+    border: 1px solid var(--color-border-soft);
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
     box-sizing: border-box;
@@ -28,7 +28,9 @@
     font-size: 19px;
     font-weight: 500;
     line-height: 1.5;
-    margin: 34px 0 28px;
+    margin-top: 12px;
+    margin-bottom: 28px;
+    font-style: italic;
 }
 
 .name {

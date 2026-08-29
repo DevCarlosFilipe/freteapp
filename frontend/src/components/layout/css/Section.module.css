@@ -33,10 +33,10 @@
 }
 
 .black {
-	background-color: #171c1f;
+	background-color: var(--color-black);
     color: white;
 }
 
 .gray {
-	background-color: #f7f7f7;
+	background-color: var(--color-gray);
 }

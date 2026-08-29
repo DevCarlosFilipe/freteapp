@@ -1,7 +1,19 @@
+:root {
+    --color-green: #329d3d;
+    --color-black: #171c1f;
+    --color-gray: #f7f7f7;
+    --color-gray-soft: #f9f9f9;
+    --color-border-soft: #ececec;
+}
+
 body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
+    background-color: var(--color-gray-soft);
     color: #333;
+}
+
+.root {
+    background-color: var(--color-black);
 }
