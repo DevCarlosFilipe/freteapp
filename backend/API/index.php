@@ -1,26 +1,44 @@
 <?php
 
-header("Access-Control-Allow-Origin: *");
-header("Content-Type: application/json; charset=UTF-8");
+header('Content-Type: application/json; charset=utf-8');
+
+require_once __DIR__ . '/../controllers/AuthController.php';
+
+$method = $_SERVER['REQUEST_METHOD'];
+
+$data = ($method === 'POST') ? json_decode(
+    file_get_contents('php://input'),
+    true
+) : $_GET;
+
+$action = $data['action'] ?? null;
 
 
-$action = match ($_SERVER['REQUEST_METHOD']) {
-    'GET' => filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING),
-    'POST' => filter_input(INPUT_POST, 'action', FILTER_SANITIZE_STRING),
-    default => "Método não requisitado",
-};
+switch ($action) {
 
-$msg = match ($_SERVER['REQUEST_METHOD']) {
-    'GET' => filter_input(INPUT_GET, 'msg', FILTER_SANITIZE_STRING),
-    'POST' => filter_input(INPUT_POST, 'msg', FILTER_SANITIZE_STRING),
-    default => "Método não requisitado",
-};
+    case 'login':
 
-echo json_encode([
-    "success" => true,
-    "message" => "API funcionando! Acesse /api.",
-    "tt" => "mensagem de teste com variável TT",
-    "method" => $_SERVER['REQUEST_METHOD'],
-    "msg" => $msg,
-    "action" => $action
-]);
+        $controller = new AuthController();
+        $controller->login($data);
+
+        break;
+
+
+    case 'register':
+
+        $controller = new AuthController();
+        $controller->register($data);
+
+        break;
+
+
+    default:
+
+        echo json_encode([
+            'success' => false,
+            'message' => 'Ação não encontrada.',
+            'data' => null
+        ], JSON_UNESCAPED_UNICODE);
+
+        break;
+}

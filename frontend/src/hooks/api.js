@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const API_URL = "http://192.168.18.123/freteapp/backend/API/";
+const API_URL = "http://192.168.18.123/freteapp/backend/api/";
 
 function useApi(params = {}) {
     const [data, setData] = useState(null);
