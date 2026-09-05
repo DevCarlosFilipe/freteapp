@@ -1,37 +1,52 @@
-const API_BASE_URL = (import.meta.env.VITE_API_URL || 'http://192.168.18.123/freteapp/backend').replace(/\/+$/, '');
+import { useEffect, useState } from "react";
 
-export const API_URL_CANDIDATES = [
-    `${API_BASE_URL}/api`,
-    `${API_BASE_URL}/API`,
-    `${API_BASE_URL}/api/`,
-    `${API_BASE_URL}/API/`
-];
+const API_URL = "http://192.168.18.123/freteapp/backend/API/";
 
-export const API_URL = API_URL_CANDIDATES[0];
+function useApi(params = {}) {
+    const [data, setData] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-export async function fetchApi() {
-    let lastError = null;
+    useEffect(() => {
+        async function request() {
+            setLoading(true);
+            setError(null);
+            setData(null);
 
-    for (const url of API_URL_CANDIDATES) {
-        try {
-            const response = await fetch(url, {
-                headers: {
-                    Accept: 'application/json'
+            try {
+                const query = new URLSearchParams(params);
+                const url = `${API_URL}?${query}`;
+
+                const response = await fetch(url);
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
                 }
-            });
 
-            if (!response.ok) {
-                lastError = new Error(`HTTP ${response.status}`);
-                continue;
+                const contentType = response.headers.get("content-type") || "";
+
+                if (!contentType.includes("application/json")) {
+                    const text = await response.text();
+                    throw new Error(`Resposta inesperada do backend: ${text.slice(0, 150)}`);
+                }
+
+                const json = await response.json();
+                setData(json);
+            } catch (err) {
+                setError(err.message || "Erro ao consultar a API.");
+            } finally {
+                setLoading(false);
             }
-
-            return response;
-        } catch (error) {
-            lastError = error;
         }
-    }
 
-    throw lastError || new Error('API indisponível');
+        request();
+    }, [params]);
+
+    return {
+        data,
+        loading,
+        error
+    };
 }
 
-export default API_URL;
+export default useApi;
