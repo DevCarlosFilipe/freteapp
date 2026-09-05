@@ -1,5 +1,5 @@
 import { useState } from "react"
-import useApi from "../config/api"
+import useApi from "../hooks/api"
 
 const exemplos = [
     { label: "Teste simples", params: { action: "teste" } },

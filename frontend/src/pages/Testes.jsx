@@ -1,4 +1,4 @@
-import useAPI from "../config/api"
+import useAPI from "../hooks/api"
 
 function Testes() {
     const { data, loading, error } = useAPI({ action: "teste7", msg: "palavras de teste", method: "post" })
