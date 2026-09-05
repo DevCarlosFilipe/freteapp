@@ -1,15 +1,21 @@
 import useAPI from "../hooks/api"
+import styles from "../styles/Testes.module.css"
 
 function Testes() {
-    const { data, loading, error } = useAPI({ action: "teste7", msg: "palavras de teste", method: "post" })
+    const { data, loading, error } = useAPI({
+        action: "login", 
+        email: "teste@email.com", 
+        senha: "123456",
+        method: "get"
+    })
 
-    if (loading) return <div>Loading...</div>
-    if (error) return <div>Error: {error.message}</div>
+    if (loading) return <div className={styles.container}>Loading...</div>
+    if (error) return <div className={styles.container}>Error: {error.message}</div>
 
     return (
-        <div style={{ background: "#fff", padding: "2rem", maxWidth: "980px", margin: "0 auto", fontFamily: "sans-serif" }}>
+        <div className={styles.container}>
             <h1>Testes</h1>
-            <p>{data.tt}</p>
+            <p>{data.message}</p>
 
             <h3>Dados da API</h3>
             <pre style={{ whiteSpace: "pre-wrap", margin: 0 }}>{JSON.stringify(data, null, 2)}</pre>
