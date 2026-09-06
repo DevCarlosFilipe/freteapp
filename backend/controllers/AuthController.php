@@ -93,4 +93,23 @@ class AuthController
             ]
         );
     }
+
+    public function checkAuth($data)
+    {
+        Response::success(
+            'Status de autenticação verificado.',
+            [
+                'authenticated' => $this->authService->checkAuth()
+            ]
+        );
+    }
+
+    public function logout($data)
+    {
+        $result = $this->authService->logout();
+
+        Response::success(
+            $result['message']
+        );
+    }
 }

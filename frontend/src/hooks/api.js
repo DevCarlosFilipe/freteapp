@@ -27,7 +27,8 @@ function useApi(params = {}) {
                 const query = new URLSearchParams(requestParams);
                 const url = method === "get" ? `${API_URL}?${query}` : API_URL;
                 const requestOptions = {
-                    method: method.toUpperCase()
+                    method: method.toUpperCase(),
+                    credentials: "include"
                 };
 
                 if (method === "post") {

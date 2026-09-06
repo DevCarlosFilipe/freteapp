@@ -3,14 +3,12 @@ import styles from "../styles/Testes.module.css"
 
 function Testes() {
     const { data, loading, error } = useAPI({
-        action: "auth.login", 
-        email: "teste@email.com", 
-        senha: "123456",
-        method: "get"
+        action: "auth.logout",
+        method: "post"
     })
 
     if (loading) return <div className={styles.container}>Loading...</div>
-    if (error) return <div className={styles.container}>Error: {error.message}</div>
+    if (error) return <div className={styles.container}>Error: {error}</div>
 
     return (
         <div className={styles.container}>
