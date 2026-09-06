@@ -10,49 +10,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit;
 }
 
-require_once __DIR__ . '/../controllers/AuthController.php';
+require_once __DIR__ . '/../router/Router.php';
 
-$method = $_SERVER['REQUEST_METHOD'];
+$router = new Router();
 
-$data = $_GET;
-
-if ($method === 'POST') {
-    $contentType = $_SERVER['CONTENT_TYPE'] ?? '';
-    $rawBody = file_get_contents('php://input');
-
-    $data = str_contains($contentType, 'application/json')
-        ? (json_decode($rawBody, true) ?: [])
-        : $_POST;
-}
-
-$action = $data['action'] ?? null;
-
-
-switch ($action) {
-
-    case 'login':
-
-        $controller = new AuthController();
-        $controller->login($data);
-
-        break;
-
-
-    case 'register':
-
-        $controller = new AuthController();
-        $controller->register($data);
-
-        break;
-
-
-    default:
-
-        echo json_encode([
-            'success' => false,
-            'message' => 'Ação não encontrada.',
-            'data' => null
-        ], JSON_UNESCAPED_UNICODE);
-
-        break;
-}
+$router->run();

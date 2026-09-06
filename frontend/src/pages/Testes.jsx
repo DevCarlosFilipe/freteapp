@@ -3,7 +3,7 @@ import styles from "../styles/Testes.module.css"
 
 function Testes() {
     const { data, loading, error } = useAPI({
-        action: "login", 
+        action: "auth.login", 
         email: "teste@email.com", 
         senha: "123456",
         method: "get"
