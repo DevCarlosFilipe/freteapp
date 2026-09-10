@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import Login from "./Login";
 import Register from "./Register";
 import ForgotPassword from "./ForgotPassword";
@@ -8,6 +9,21 @@ function Auth({ children }) {
 
     const [view, setView] = useState(null);
     const [closing, setClosing] = useState(false);
+    const touchStartRef = useRef(null);
+
+    useEffect(() => {
+        if (!view) {
+            document.body.style.overflow = "";
+            return;
+        }
+
+        const previousOverflow = document.body.style.overflow;
+        document.body.style.overflow = "hidden";
+
+        return () => {
+            document.body.style.overflow = previousOverflow;
+        };
+    }, [view]);
 
     function open(viewName) {
         setClosing(false);
@@ -34,6 +50,34 @@ function Auth({ children }) {
 
     function forgotPassword() {
         open("forgot");
+    }
+
+    function handleTouchStart(event) {
+        if (event.touches.length !== 1) {
+            return;
+        }
+
+        const touch = event.touches[0];
+        touchStartRef.current = {
+            x: touch.clientX,
+            y: touch.clientY
+        };
+    }
+
+    function handleTouchEnd(event) {
+        if (!touchStartRef.current || !event.changedTouches.length) {
+            return;
+        }
+
+        const touch = event.changedTouches[0];
+        const deltaX = touch.clientX - touchStartRef.current.x;
+        const deltaY = touch.clientY - touchStartRef.current.y;
+
+        if (deltaX > 90 && Math.abs(deltaX) > Math.abs(deltaY)) {
+            close();
+        }
+
+        touchStartRef.current = null;
     }
 
     function renderContent() {
@@ -89,7 +133,7 @@ function Auth({ children }) {
         <>
             {renderContent()}
 
-            {view && (
+            {view && createPortal(
                 <div className={styles.overlay}>
 
                     <div
@@ -101,6 +145,8 @@ function Auth({ children }) {
                         className={`${styles.drawer} ${
                             closing ? styles.closing : ""
                         }`}
+                        onTouchStart={handleTouchStart}
+                        onTouchEnd={handleTouchEnd}
                     >
 
                         <button
@@ -119,7 +165,8 @@ function Auth({ children }) {
 
                     </aside>
 
-                </div>
+                </div>,
+                document.body
             )}
 
         </>

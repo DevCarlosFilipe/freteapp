@@ -17,7 +17,7 @@
 }
 
 .arrow {
-    color: #329d3d;
+    color: var(--color-theme);
     flex: 0 0 auto;
     font-size: 2rem;
 }

@@ -4,7 +4,7 @@
     position: sticky;
     top: 0;
     transition: transform 0.25s ease;
-    z-index: 1000;
+    z-index: 10;
 }
 
 .header--hidden {
@@ -61,5 +61,5 @@
 }
 
 .menu-item > .nav-link.active {
-    color: #329d3d;
+    color: var(--color-theme);
 }

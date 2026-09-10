@@ -19,7 +19,7 @@
 }
 
 .star {
-    color: #329d3d;
+    color: var(--color-theme);
     font-size: 24px;
 }
 

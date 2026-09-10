@@ -1,5 +1,6 @@
 :root {
-    --color-green: #329d3d;
+    --color-theme: #329d3d;
+    --color-light-theme: #1ffd0d1a;
     --color-black: #171c1f;
     --color-gray: #f7f7f7;
     --color-gray-soft: #f9f9f9;
@@ -16,4 +17,21 @@ body {
 
 #root {
     background-color: var(--color-black);
+}
+
+.btn-primary,
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary:focus-visible {
+    border-radius: 0 !important;
+    background-color: var(--color-theme) !important;
+    border-color: var(--color-theme) !important;
+    color: #fff !important;
+    box-shadow: none !important;
+}
+
+.btn-primary:hover,
+.btn-primary:focus-visible {
+    filter: brightness(0.96);
 }

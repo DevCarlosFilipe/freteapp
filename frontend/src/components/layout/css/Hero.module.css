@@ -8,7 +8,7 @@
 }
 
 .greenTitle {
-    color: #55d563;
+    color: var(--color-theme);
 	display: block;
 }
 
@@ -28,7 +28,7 @@
 
 .eyebrow {
 	margin: 0 0 1rem;
-	color: #55d563;
+	color: var(--color-theme);
 	font-size: 0.8rem;
 	font-weight: 700;
 	letter-spacing: 0.12em;
@@ -81,12 +81,12 @@
 }
 
 .actionPrimary {
-	background-color: var(--color-green);
+	background-color: var(--color-theme);
 }
 
 .actionPrimary:hover,
 .actionPrimary:focus-visible {
-	background-color: var(--color-green);
+	background-color: var(--color-theme);
 }
 
 .actionSecondary {
@@ -96,7 +96,7 @@
 
 .actionSecondary:hover,
 .actionSecondary:focus-visible {
-	border-color: var(--color-green);
+	border-color: var(--color-theme);
 	background-color: rgba(23, 28, 31, 0.92);
 }
 

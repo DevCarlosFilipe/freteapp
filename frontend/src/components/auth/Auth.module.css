@@ -1,38 +1,32 @@
 .overlay {
     position: fixed;
     inset: 0;
-    z-index: 9999;
+    z-index: 20000;
+    display: flex;
+    justify-content: flex-end;
+    pointer-events: auto;
 }
 
 .shadow {
     position: absolute;
     inset: 0;
-
     background: rgba(0, 0, 0, 0.45);
-
     animation: shadowIn 300ms ease forwards;
 }
 
 .drawer {
-    position: absolute;
-
+    position: relative;
     top: 0;
     right: 0;
-
     width: 420px;
     max-width: 100%;
-
-    height: 100%;
-
+    height: 100vh;
     background: #ffffff;
-
     box-shadow: -8px 0 30px rgba(0, 0, 0, 0.15);
-
     animation: drawerIn 300ms ease forwards;
-
     overflow-y: auto;
-
     touch-action: pan-y;
+    z-index: 1;
 }
 
 .drawer.closing {
@@ -41,26 +35,18 @@
 
 .closeButton {
     position: absolute;
-
     top: 18px;
     left: 18px;
-
     width: 42px;
     height: 42px;
-
     border: none;
     border-radius: 50%;
-
     background: #f1f1f1;
-
     font-size: 22px;
-
     cursor: pointer;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     transition:
         background 150ms ease,
         transform 150ms ease;
@@ -124,10 +110,8 @@
     .closeButton {
         top: 16px;
         left: 16px;
-
         width: 46px;
         height: 46px;
-
         font-size: 24px;
     }
 }
