@@ -37,10 +37,6 @@
         "pcntl",
         "pcre",
         "PDO",
-        "pdo_ibm",
-        "pdo_mysql",
-        "pdo_pgsql",
-        "pdo_sqlite",
         "pgsql",
         "Phar",
         "posix",
@@ -76,6 +72,12 @@
     ],
     "intelephense.diagnostics.undefinedFunctions": false,
     "intelephense.diagnostics.undefinedConstants": false,
+    "intelephense.environment.phpVersion": "8.2.0",
+    "intelephense.diagnostics.exclude": {
+        "**/*.php": [
+            "P1132"
+        ]
+    },
     "php.stubs": [
         "*",
         "wordpress"
