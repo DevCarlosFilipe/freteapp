@@ -1,10 +1,11 @@
 import Input from "../layout/form/Input";
 import Button from "../layout/form/Button";
 import ActionLink from "../layout/form/ActionLink";
+import CheckBox from "../layout/form/CheckBox";
 
 function Register({ close, login }) {
     return (
-        <div className="w-100" style={{ maxWidth: "440px" }}>
+        <>
             <div className="text-center mb-4">
                 <div
                     className="d-inline-flex align-items-center justify-content-center rounded-circle mb-3"
@@ -62,12 +63,11 @@ function Register({ close, login }) {
                     placeholder="Confirmar senha"
                 />
 
-                <div className="form-check mb-4">
-                    <input className="form-check-input" type="checkbox" value="" id="acceptTerms" />
-                    <label className="form-check-label small text-secondary" htmlFor="acceptTerms">
-                        Concordo com os termos e políticas de uso
-                    </label>
-                </div>
+                <CheckBox
+                    id="acceptTerms"
+                    label="Concordo com os termos e políticas de uso"
+                    className="mb-4"
+                />
 
                 <div className="d-grid gap-2 mb-3">
                     <Button type="submit" variant="primary" size="lg" className="fw-semibold rounded-pill">
@@ -83,7 +83,7 @@ function Register({ close, login }) {
                     </ActionLink>
                 </div>
             </form>
-        </div>
+        </>
     );
 }
 

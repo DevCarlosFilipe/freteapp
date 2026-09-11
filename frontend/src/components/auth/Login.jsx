@@ -1,6 +1,7 @@
 import Input from "../layout/form/Input";
 import Button from "../layout/form/Button";
 import ActionLink from "../layout/form/ActionLink";
+import CheckBox from "../layout/form/CheckBox";
 
 function Login({
     close,
@@ -8,7 +9,7 @@ function Login({
     forgotPassword
 }) {
     return (
-        <div className="w-100" style={{ maxWidth: "440px" }}>
+        <>
             <div className="text-center mb-4">
                 <div
                     className="d-inline-flex align-items-center justify-content-center rounded-circle mb-3"
@@ -27,11 +28,11 @@ function Login({
 
             <form>
                 <Input
-                    id="login-email"
-                    label="E-mail"
-                    type="email"
-                    name="email"
-                    placeholder="E-mail"
+                    id="login-identifier"
+                    label="E-mail, usuário ou telefone"
+                    type="text"
+                    name="identifier"
+                    placeholder="E-mail, usuário ou telefone"
                 />
 
                 <Input
@@ -43,12 +44,7 @@ function Login({
                 />
 
                 <div className="d-flex justify-content-between align-items-center mb-4">
-                    <div className="form-check">
-                        <input className="form-check-input" type="checkbox" value="" id="rememberMe" />
-                        <label className="form-check-label small text-secondary" htmlFor="rememberMe">
-                            Lembrar-me
-                        </label>
-                    </div>
+                    <CheckBox id="rememberMe" label="Lembrar-me" />
 
                     <ActionLink onClick={forgotPassword} className="small text-decoration-none">
                         Esqueci minha senha
@@ -69,7 +65,7 @@ function Login({
                     </ActionLink>
                 </div>
             </form>
-        </div>
+        </>
     );
 }
 
