@@ -1,84 +1,212 @@
 import { useEffect, useRef, useState } from "react";
+
 import { createPortal } from "react-dom";
+
 import Login from "./Login";
 import Register from "./Register";
 import ForgotPassword from "./ForgotPassword";
+
 import styles from "./Auth.module.css";
 
-function Auth({ children }) {
+function Auth({ children, action }) {
+
+    /*
+     * ============================================================
+     * MODO FORMULÁRIO
+     * ============================================================
+     *
+     * Quando action existe, o próprio Auth funciona como <form>.
+     *
+     * Exemplo:
+     *
+     * <Auth action="auth.login">
+     *     <Input name="identifier" />
+     *     <Input name="password" />
+     *     <Button type="submit">Entrar</Button>
+     * </Auth>
+     *
+     */
+
+    const formRef = useRef(null);
+
+    const [formData, setFormData] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+    const [success, setSuccess] = useState(false);
+
+    function handleSubmit(event) {
+
+        event.preventDefault();
+
+        if (!formRef.current) {
+            return;
+        }
+
+        const form = new FormData(formRef.current);
+
+        const data = {};
+
+        for (const [name, value] of form.entries()) {
+            data[name] = value;
+        }
+
+        setFormData(data);
+
+        /*
+         * A integração com useAPI entra aqui.
+         *
+         * Por enquanto estamos apenas coletando os dados.
+         *
+         * Exemplo futuro:
+         *
+         * const response = ...
+         *
+         * if (response.success) {
+         *     setSuccess(true);
+         * } else {
+         *     setError(response.message);
+         * }
+         */
+    }
+
+    if (action) {
+        return (
+            <form
+                ref={formRef}
+                onSubmit={handleSubmit}
+            >
+                {typeof children === "function"
+                    ? children({
+                        data: formData,
+                        loading,
+                        error,
+                        success
+                    })
+                    : children
+                }
+            </form>
+        );
+    }
+
+
+    /*
+     * ============================================================
+     * MODO AUTH / DRAWER
+     * ============================================================
+     */
 
     const [view, setView] = useState(null);
     const [closing, setClosing] = useState(false);
+
     const touchStartRef = useRef(null);
 
     useEffect(() => {
+
         if (!view) {
             document.body.style.overflow = "";
             return;
         }
 
         const previousOverflow = document.body.style.overflow;
+
         document.body.style.overflow = "hidden";
 
         return () => {
             document.body.style.overflow = previousOverflow;
         };
+
     }, [view]);
 
+
     function open(viewName) {
+
         setClosing(false);
         setView(viewName);
+
     }
+
 
     function close() {
 
         setClosing(true);
 
         setTimeout(() => {
+
             setView(null);
             setClosing(false);
+
         }, 300);
+
     }
+
 
     function login() {
+
         open("login");
+
     }
+
 
     function register() {
+
         open("register");
+
     }
+
 
     function forgotPassword() {
+
         open("forgot");
+
     }
 
+
     function handleTouchStart(event) {
+
         if (event.touches.length !== 1) {
             return;
         }
 
         const touch = event.touches[0];
+
         touchStartRef.current = {
             x: touch.clientX,
             y: touch.clientY
         };
+
     }
 
+
     function handleTouchEnd(event) {
-        if (!touchStartRef.current || !event.changedTouches.length) {
+
+        if (
+            !touchStartRef.current ||
+            !event.changedTouches.length
+        ) {
             return;
         }
 
         const touch = event.changedTouches[0];
-        const deltaX = touch.clientX - touchStartRef.current.x;
-        const deltaY = touch.clientY - touchStartRef.current.y;
 
-        if (deltaX > 90 && Math.abs(deltaX) > Math.abs(deltaY)) {
+        const deltaX =
+            touch.clientX -
+            touchStartRef.current.x;
+
+        const deltaY =
+            touch.clientY -
+            touchStartRef.current.y;
+
+        if (
+            deltaX > 90 &&
+            Math.abs(deltaX) > Math.abs(deltaY)
+        ) {
             close();
         }
 
         touchStartRef.current = null;
+
     }
+
 
     function renderContent() {
 
@@ -90,16 +218,20 @@ function Auth({ children }) {
                 forgotPassword,
                 close
             });
+
         }
 
         return children;
+
     }
+
 
     function renderView() {
 
         switch (view) {
 
             case "login":
+
                 return (
                     <Login
                         close={close}
@@ -108,7 +240,9 @@ function Auth({ children }) {
                     />
                 );
 
+
             case "register":
+
                 return (
                     <Register
                         close={close}
@@ -116,7 +250,9 @@ function Auth({ children }) {
                     />
                 );
 
+
             case "forgot":
+
                 return (
                     <ForgotPassword
                         close={close}
@@ -124,16 +260,21 @@ function Auth({ children }) {
                     />
                 );
 
+
             default:
                 return null;
+
         }
+
     }
+
 
     return (
         <>
             {renderContent()}
 
             {view && createPortal(
+
                 <div className={styles.overlay}>
 
                     <div
@@ -158,19 +299,20 @@ function Auth({ children }) {
                         </button>
 
                         <div className={styles.content}>
-
                             {renderView()}
-
                         </div>
 
                     </aside>
 
                 </div>,
+
                 document.body
+
             )}
 
         </>
     );
+
 }
 
 export default Auth;

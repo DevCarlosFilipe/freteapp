@@ -7,6 +7,7 @@ import Testes from './pages/Testes'
 import TestesBE from './pages/TestesBE'
 import Contact from './pages/Contact'
 import CitiesServed from './pages/CitiesServed'
+import Dashboard from './pages/Dashboard'
 import NotFound from './pages/NotFound'
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
                 <Route path="/testes-be" element={<TestesBE />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/cities-served" element={<CitiesServed />} />
+                <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
         </BrowserRouter>
