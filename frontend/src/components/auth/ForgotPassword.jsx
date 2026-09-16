@@ -2,7 +2,7 @@ import Input from "../layout/form/Input";
 import Button from "../layout/form/Button";
 import ActionLink from "../layout/form/ActionLink";
 
-function ForgotPassword({ close, login }) {
+function ForgotPassword({ login }) {
     return (
         <>
             <div className="text-center mb-4">

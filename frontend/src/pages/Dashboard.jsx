@@ -1,4 +1,26 @@
+import useAPI from "../hooks/api";
+
+function getGreeting(hour) {
+    if (hour >= 18) {
+        return "Boa noite";
+    }
+
+    if (hour >= 12) {
+        return "Boa tarde";
+    }
+
+    return "Bom dia";
+}
+
 function Dashboard() {
+    const { data, loading, error } = useAPI({
+        action: "auth.checkAuth",
+        method: "post"
+    });
+
+    const user = data?.data?.user;
+    const greeting = getGreeting(new Date().getHours());
+
     return (
         <div className="container py-5">
             <div className="row g-4">
@@ -8,7 +30,18 @@ function Dashboard() {
                             <p className="text-uppercase text-secondary mb-1" style={{ letterSpacing: "0.12em", fontSize: "0.75rem" }}>
                                 Painel
                             </p>
-                            <h1 className="fw-bold mb-0">Dashboard</h1>
+                            <h1 className="fw-bold mb-2">
+                                {loading
+                                    ? "Carregando seu painel..."
+                                    : `${greeting}, ${user?.username || "viajante"}!`
+                                }
+                            </h1>
+                            <p className="text-secondary mb-0">
+                                {error
+                                    ? "Não foi possível consultar sua sessão agora."
+                                    : "Que bom ter você por aqui. Vamos fazer esse dia render?"
+                                }
+                            </p>
                         </div>
                     </div>
                 </div>

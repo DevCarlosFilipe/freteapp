@@ -6,17 +6,8 @@ require_once __DIR__ . '/../security/Session.php';
 
 class AuthService
 {
-    public function login($identifier, $senha)
+    public function login($identifier, $senha, $rememberMe = false)
     {
-        // Impede um novo login se já existir uma sessão autenticada
-        if (Session::checkAuth()) {
-            return [
-                'success' => false,
-                'message' => 'Já existe um usuário autenticado.',
-                'user' => null
-            ];
-        }
-
         // Usuário temporário para teste
         $senhaHash = Password::hash('123456');
 
@@ -48,21 +39,38 @@ class AuthService
             strtolower($identifierNormalizado) === strtolower($usuario->getEmail()) ||
             $telefoneNormalizado === $usuario->getPhone();
 
-        if (
-            !$identificadorValido ||
-            !Password::verify(
-                $senha,
-                $usuario->getPassword()
-            )
-        ) {
+        if (!$identificadorValido) {
             return [
                 'success' => false,
-                'message' => 'Usuário, e-mail, telefone ou senha inválidos.',
+                'message' => 'Usuário incorreto ou não existe.',
+                'field' => 'email',
                 'user' => null
             ];
         }
 
-        Session::login($usuario->getId());
+        if (!Password::verify($senha, $usuario->getPassword())) {
+            return [
+                'success' => false,
+                'message' => 'Senha incorreta.',
+                'field' => 'senha',
+                'user' => null
+            ];
+        }
+
+        if (Session::checkAuth()) {
+            Session::logout();
+        }
+
+        Session::login(
+            $usuario->getId(),
+            $rememberMe,
+            [
+                'id' => $usuario->getId(),
+                'name' => $usuario->getName(),
+                'username' => $usuario->getUsername(),
+                'email' => $usuario->getEmail()
+            ]
+        );
 
         return [
             'success' => true,
@@ -85,7 +93,16 @@ class AuthService
             $senhaHash
         );
 
-        Session::login($usuario->getId());
+        Session::login(
+            $usuario->getId(),
+            false,
+            [
+                'id' => $usuario->getId(),
+                'name' => $usuario->getName(),
+                'username' => $usuario->getUsername(),
+                'email' => $usuario->getEmail()
+            ]
+        );
 
         return [
             'success' => true,
@@ -96,7 +113,17 @@ class AuthService
 
     public function checkAuth()
     {
-        return Session::checkAuth();
+        if (!Session::checkAuth()) {
+            return [
+                'authenticated' => false,
+                'user' => null
+            ];
+        }
+
+        return [
+            'authenticated' => true,
+            'user' => Session::getUser()
+        ];
     }
 
     public function logout()

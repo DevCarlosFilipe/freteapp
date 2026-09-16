@@ -16,10 +16,17 @@ class AuthController
     {
         $email = $data['email'] ?? null;
         $senha = $data['senha'] ?? null;
+        $rememberMe = filter_var(
+            $data['rememberMe'] ?? false,
+            FILTER_VALIDATE_BOOLEAN
+        );
 
         if (!$email || !$senha) {
             Response::error(
-                'E-mail e senha são obrigatórios.'
+                'E-mail e senha são obrigatórios.',
+                [
+                    'field' => !$email ? 'email' : 'senha'
+                ]
             );
 
             return;
@@ -27,12 +34,16 @@ class AuthController
 
         $result = $this->authService->login(
             $email,
-            $senha
+            $senha,
+            $rememberMe
         );
 
         if (!$result['success']) {
             Response::error(
-                $result['message']
+                $result['message'],
+                [
+                    'field' => $result['field'] ?? null
+                ]
             );
 
             return;
@@ -99,7 +110,7 @@ class AuthController
         Response::success(
             'Status de autenticação verificado.',
             [
-                'authenticated' => $this->authService->checkAuth()
+                ...$this->authService->checkAuth()
             ]
         );
     }

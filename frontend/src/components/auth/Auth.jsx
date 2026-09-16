@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { createPortal } from "react-dom";
+import useApi from "../../hooks/api";
 
 import Login from "./Login";
 import Register from "./Register";
@@ -8,7 +10,9 @@ import ForgotPassword from "./ForgotPassword";
 
 import styles from "./Auth.module.css";
 
-function Auth({ children, action }) {
+function Auth({ children, action, onSuccess }) {
+
+    const navigate = useNavigate();
 
     /*
      * ============================================================
@@ -30,75 +34,60 @@ function Auth({ children, action }) {
     const formRef = useRef(null);
 
     const [formData, setFormData] = useState(null);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
-    const [success, setSuccess] = useState(false);
-
-    function handleSubmit(event) {
-
-        event.preventDefault();
-
-        if (!formRef.current) {
-            return;
-        }
-
-        const form = new FormData(formRef.current);
-
-        const data = {};
-
-        for (const [name, value] of form.entries()) {
-            data[name] = value;
-        }
-
-        setFormData(data);
-
-        /*
-         * A integração com useAPI entra aqui.
-         *
-         * Por enquanto estamos apenas coletando os dados.
-         *
-         * Exemplo futuro:
-         *
-         * const response = ...
-         *
-         * if (response.success) {
-         *     setSuccess(true);
-         * } else {
-         *     setError(response.message);
-         * }
-         */
-    }
-
-    if (action) {
-        return (
-            <form
-                ref={formRef}
-                onSubmit={handleSubmit}
-            >
-                {typeof children === "function"
-                    ? children({
-                        data: formData,
-                        loading,
-                        error,
-                        success
-                    })
-                    : children
-                }
-            </form>
-        );
-    }
-
-
-    /*
-     * ============================================================
-     * MODO AUTH / DRAWER
-     * ============================================================
-     */
+    const [requestData, setRequestData] = useState(null);
 
     const [view, setView] = useState(null);
     const [closing, setClosing] = useState(false);
+    const [loginCheckVersion, setLoginCheckVersion] = useState(0);
 
     const touchStartRef = useRef(null);
+
+    const api = useApi(
+        action && requestData
+            ? {
+                ...requestData,
+                action,
+                method: "post",
+                enabled: true
+            }
+            : { enabled: false }
+    );
+
+    const loading = Boolean(action && requestData && api.loading);
+    const response = action && requestData ? api.data : null;
+    const error = api.error || (
+        response && response.success === false
+            ? response.message
+            : null
+    );
+    const errorField = response?.data?.field || null;
+    const success = Boolean(response?.success);
+
+    const authCheck = useApi({
+        action: "auth.checkAuth",
+        method: "post",
+        requestVersion: loginCheckVersion,
+        enabled: !action && loginCheckVersion > 0
+    });
+
+    useEffect(() => {
+        if (action || loginCheckVersion === 0 || authCheck.loading || !authCheck.data) {
+            return;
+        }
+
+        if (authCheck.data.data?.authenticated) {
+            navigate("/dashboard");
+            return;
+        }
+
+        open("login");
+    }, [action, authCheck.data, authCheck.loading, loginCheckVersion, navigate]);
+
+    useEffect(() => {
+        if (response?.success && onSuccess) {
+            onSuccess(response);
+        }
+    }, [onSuccess, response]);
 
     useEffect(() => {
 
@@ -117,6 +106,52 @@ function Auth({ children, action }) {
 
     }, [view]);
 
+    function handleSubmit(event) {
+
+        event.preventDefault();
+
+        if (!formRef.current) {
+            return;
+        }
+
+        const form = new FormData(formRef.current);
+
+        const data = {};
+
+        for (const [name, value] of form.entries()) {
+            data[name] = value;
+        }
+
+        setFormData(data);
+        setRequestData(data);
+    }
+
+    if (action) {
+        return (
+            <form
+                ref={formRef}
+                onSubmit={handleSubmit}
+            >
+                {typeof children === "function"
+                    ? children({
+                        data: formData,
+                        loading,
+                        error,
+                        errorField,
+                        success
+                    })
+                    : children
+                }
+            </form>
+        );
+    }
+
+
+    /*
+     * ============================================================
+     * MODO AUTH / DRAWER
+     * ============================================================
+     */
 
     function open(viewName) {
 
@@ -142,7 +177,7 @@ function Auth({ children, action }) {
 
     function login() {
 
-        open("login");
+        setLoginCheckVersion((version) => version + 1);
 
     }
 

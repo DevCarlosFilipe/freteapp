@@ -2,6 +2,8 @@
 
 class Session
 {
+    private const REMEMBER_ME_LIFETIME = 2592000;
+
     public static function start()
     {
         if (session_status() === PHP_SESSION_ACTIVE) {
@@ -17,13 +19,39 @@ class Session
         session_start();
     }
 
-    public static function login($userId)
+    public static function login($userId, $rememberMe = false, $userData = [])
     {
         self::start();
 
         session_regenerate_id(true);
 
         $_SESSION['user_id'] = $userId;
+        $_SESSION['user'] = $userData;
+
+        self::setCookieLifetime($rememberMe);
+    }
+
+    private static function setCookieLifetime($rememberMe)
+    {
+        if (!headers_sent()) {
+            $params = session_get_cookie_params();
+            $expires = $rememberMe
+                ? time() + self::REMEMBER_ME_LIFETIME
+                : 0;
+
+            setcookie(
+                session_name(),
+                session_id(),
+                [
+                    'expires' => $expires,
+                    'path' => $params['path'],
+                    'domain' => $params['domain'],
+                    'secure' => $params['secure'],
+                    'httponly' => $params['httponly'],
+                    'samesite' => $params['samesite'] ?? 'Lax'
+                ]
+            );
+        }
     }
 
     public static function checkAuth()
@@ -38,6 +66,13 @@ class Session
         self::start();
 
         return $_SESSION['user_id'] ?? null;
+    }
+
+    public static function getUser()
+    {
+        self::start();
+
+        return $_SESSION['user'] ?? null;
     }
 
     public static function logout()

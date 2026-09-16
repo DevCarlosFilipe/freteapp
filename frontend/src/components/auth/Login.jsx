@@ -1,29 +1,35 @@
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 import Auth from "./Auth";
 
 import Input from "../layout/form/Input";
 import Button from "../layout/form/Button";
 import ActionLink from "../layout/form/ActionLink";
 import CheckBox from "../layout/form/CheckBox";
+import Alert from "../layout/Alert";
 
 
 function Login({
-    close,
     register,
     forgotPassword
 }) {
+    const navigate = useNavigate();
 
     return (
 
         <Auth action="auth.login">
 
             {({
-                data,
                 loading,
                 error,
+                errorField,
                 success
             }) => (
 
                 <>
+
+                    {success && <LoginRedirect navigate={navigate} />}
 
                     <div className="text-center mb-4">
 
@@ -50,12 +56,26 @@ function Login({
                     </div>
 
 
+
+                    {error && (
+                        <Alert variant="danger">
+                            {error}
+                        </Alert>
+                    )}
+
+                    {success && (
+                        <Alert variant="success">
+                            Login realizado com sucesso!
+                        </Alert>
+                    )}
+                    
                     <Input
                         id="login-identifier"
                         label="E-mail, usuário ou telefone"
                         type="text"
-                        name="identifier"
+                        name="email"
                         placeholder="E-mail, usuário ou telefone"
+                        error={errorField === "email" ? error : null}
                     />
 
 
@@ -63,8 +83,9 @@ function Login({
                         id="login-password"
                         label="Senha"
                         type="password"
-                        name="password"
+                        name="senha"
                         placeholder="Senha"
+                        error={errorField === "senha" ? error : null}
                     />
 
 
@@ -73,6 +94,7 @@ function Login({
                         <CheckBox
                             id="rememberMe"
                             name="rememberMe"
+                            value="true"
                             label="Lembrar-me"
                         />
 
@@ -84,21 +106,6 @@ function Login({
                         </ActionLink>
 
                     </div>
-
-
-                    {error && (
-                        <div className="alert alert-danger">
-                            {error}
-                        </div>
-                    )}
-
-
-                    {success && (
-                        <div className="alert alert-success">
-                            Login realizado com sucesso!
-                        </div>
-                    )}
-
 
                     <div className="d-grid gap-2 mb-3">
 
@@ -144,6 +151,14 @@ function Login({
 
     );
 
+}
+
+function LoginRedirect({ navigate }) {
+    useEffect(() => {
+        navigate("/dashboard");
+    }, [navigate]);
+
+    return null;
 }
 
 export default Login;

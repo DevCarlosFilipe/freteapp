@@ -4,7 +4,7 @@ import ActionLink from "../layout/form/ActionLink";
 
 import Auth from "./Auth";
 
-function Register({ close, login }) {
+function Register({ login }) {
     return (
         <>
             <div className="text-center mb-4">
@@ -52,7 +52,7 @@ function Register({ close, login }) {
                     id="register-password"
                     label="Senha"
                     type="password"
-                    name="password"
+                    name="senha"
                     placeholder="Senha"
                 />
 
