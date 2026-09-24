@@ -1,3 +1,5 @@
+import { useCallback, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import useAPI from "../hooks/api";
 
 function getGreeting(hour) {
@@ -13,13 +15,43 @@ function getGreeting(hour) {
 }
 
 function Dashboard() {
+    const navigate = useNavigate();
+    const [logoutVersion, setLogoutVersion] = useState(0);
+
     const { data, loading, error } = useAPI({
         action: "auth.checkAuth",
         method: "post"
     });
 
+    useEffect(() => {
+        if (!loading && data?.data?.authenticated === false) {
+            navigate("/");
+        }
+    }, [data, loading, navigate]);
+
+    const handleLogoutSuccess = useCallback((response) => {
+        if (response?.success) {
+            navigate("/");
+        }
+    }, [navigate]);
+
+    const {
+        loading: logoutLoading,
+        error: logoutError
+    } = useAPI({
+        action: "auth.logout",
+        method: "post",
+        requestVersion: logoutVersion,
+        enabled: logoutVersion > 0,
+        onSuccess: handleLogoutSuccess
+    });
+
     const user = data?.data?.user;
     const greeting = getGreeting(new Date().getHours());
+
+    if (!loading && data?.data?.authenticated === false) {
+        return null;
+    }
 
     return (
         <div className="container py-5">
@@ -43,7 +75,23 @@ function Dashboard() {
                                 }
                             </p>
                         </div>
+
+                        <button
+                            type="button"
+                            className="app-action-button app-action-button--outline"
+                            onClick={() => setLogoutVersion((version) => version + 1)}
+                            disabled={logoutLoading}
+                        >
+                            <i className="bi bi-box-arrow-right me-2"></i>
+                            {logoutLoading ? "Saindo..." : "Sair"}
+                        </button>
                     </div>
+
+                    {logoutError && (
+                        <div className="alert alert-danger mb-0" role="alert">
+                            Não foi possível sair agora. Tente novamente.
+                        </div>
+                    )}
                 </div>
 
                 <div className="col-md-4">

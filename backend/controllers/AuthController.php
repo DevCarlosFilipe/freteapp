@@ -2,14 +2,15 @@
 
 require_once __DIR__ . '/../services/AuthService.php';
 require_once __DIR__ . '/../responses/Response.php';
+require_once __DIR__ . '/../database/Database.php';
 
 class AuthController
 {
     private $authService;
 
-    public function __construct()
+    public function __construct(Database $database)
     {
-        $this->authService = new AuthService();
+        $this->authService = new AuthService($database);
     }
 
     public function login($data)
@@ -65,27 +66,65 @@ class AuthController
 
     public function register($data)
     {
-        $name = $data['name'] ?? null;
+        $username = trim($data['username'] ?? '');
         $email = $data['email'] ?? null;
+        $phone = $data['phone'] ?? '';
         $senha = $data['senha'] ?? null;
+        $confirmPassword = $data['confirmPassword'] ?? null;
+        $acceptTerms = filter_var(
+            $data['acceptTerms'] ?? false,
+            FILTER_VALIDATE_BOOLEAN
+        );
 
-        if (!$name || !$email || !$senha) {
+        if (!$acceptTerms) {
             Response::error(
-                'Nome, e-mail e senha são obrigatórios.'
+                'Você precisa aceitar os termos de uso para continuar.',
+                ['field' => 'acceptTerms']
+            );
+
+            return;
+        }
+
+        if (!$username || !$email || !$senha) {
+            Response::error(
+                'Nome de usuário, e-mail e senha são obrigatórios.',
+                [
+                    'field' => !$username ? 'username' : (!$email ? 'email' : 'senha')
+                ]
+            );
+
+            return;
+        }
+
+        if (strlen($senha) < 6) {
+            Response::error(
+                'A senha deve ter pelo menos 6 caracteres.',
+                ['field' => 'senha']
+            );
+
+            return;
+        }
+
+        if ($senha !== $confirmPassword) {
+            Response::error(
+                'As senhas não coincidem.',
+                ['field' => 'confirmPassword']
             );
 
             return;
         }
 
         $result = $this->authService->register(
-            $name,
+            $username,
             $email,
+            $phone,
             $senha
         );
 
         if (!$result['success']) {
             Response::error(
-                $result['message']
+                $result['message'],
+                ['field' => $result['field'] ?? null]
             );
 
             return;

@@ -1,10 +1,14 @@
 import Input from "../layout/form/Input";
 import Button from "../layout/form/Button";
 import ActionLink from "../layout/form/ActionLink";
+import Alert from "../layout/Alert";
+import { useNavigate } from "react-router-dom";
 
 import Auth from "./Auth";
 
 function Register({ login }) {
+    const navigate = useNavigate();
+
     return (
         <>
             <div className="text-center mb-4">
@@ -23,67 +27,86 @@ function Register({ login }) {
                 <p className="text-secondary mb-0">Cadastre-se e comece agora</p>
             </div>
 
-            <Auth action="auth.register" method="post">
-                <Input
-                    id="register-name"
-                    label="Nome completo"
-                    type="text"
-                    name="name"
-                    placeholder="Nome completo"
-                />
+            <Auth
+                action="auth.register"
+                method="post"
+                onSuccess={() => navigate("/dashboard")}
+            >
+                {({ error, errorField }) => (
+                    <>
+                        {error && <Alert variant="danger">{error}</Alert>}
 
-                <Input
-                    id="register-email"
-                    label="E-mail"
-                    type="email"
-                    name="email"
-                    placeholder="E-mail"
-                />
+                        <Input
+                            id="register-name"
+                            label="Nome de usuário"
+                            type="text"
+                            name="username"
+                            placeholder="Nome de usuário"
+                            error={errorField === "username" ? error : null}
+                            required
+                        />
 
-                <Input
-                    id="register-phone"
-                    label="Telefone"
-                    type="tel"
-                    name="phone"
-                    placeholder="Telefone"
-                />
+                        <Input
+                            id="register-email"
+                            label="E-mail"
+                            type="email"
+                            name="email"
+                            placeholder="E-mail"
+                            error={errorField === "email" ? error : null}
+                            required
+                        />
 
-                <Input
-                    id="register-password"
-                    label="Senha"
-                    type="password"
-                    name="senha"
-                    placeholder="Senha"
-                />
+                        <Input
+                            id="register-password"
+                            label="Senha"
+                            type="password"
+                            name="senha"
+                            placeholder="Senha"
+                            minLength={6}
+                            error={errorField === "senha" ? error : null}
+                            required
+                        />
 
-                <Input
-                    id="register-confirm-password"
-                    label="Confirmar senha"
-                    type="password"
-                    name="confirmPassword"
-                    placeholder="Confirmar senha"
-                />
+                        <Input
+                            id="register-confirm-password"
+                            label="Confirmar senha"
+                            type="password"
+                            name="confirmPassword"
+                            placeholder="Confirmar senha"
+                            minLength={6}
+                            error={errorField === "confirmPassword" ? error : null}
+                            required
+                        />
 
-                <div className="form-check mb-4">
-                    <input className="form-check-input" type="checkbox" value="" id="acceptTerms" />
-                    <label className="form-check-label small text-secondary" htmlFor="acceptTerms">
-                        Concordo com os termos e políticas de uso
-                    </label>
-                </div>
+                        <div className="form-check mb-4">
+                            <input
+                                className={`form-check-input ${errorField === "acceptTerms" ? "is-invalid" : ""}`.trim()}
+                                type="checkbox"
+                                name="acceptTerms"
+                                value="true"
+                                id="acceptTerms"
+                                required
+                            />
+                            <label className="form-check-label small text-secondary" htmlFor="acceptTerms">
+                                Concordo com os termos e políticas de uso
+                            </label>
+                        </div>
 
-                <div className="d-grid gap-2 mb-3">
-                    <Button type="submit" variant="primary" size="lg" className="fw-semibold rounded-pill">
-                        <i className="bi bi-person-check me-2"></i>
-                        Cadastrar
-                    </Button>
-                </div>
+                        <div className="d-grid gap-2 mb-3">
+                            <Button type="submit" variant="primary" size="lg" className="fw-semibold rounded-pill">
+                                <i className="bi bi-person-check me-2"></i>
+                                Cadastrar
+                            </Button>
+                        </div>
 
-                <div className="text-center mt-4">
-                    <span className="text-secondary small">Já possui uma conta?</span>
-                    <ActionLink onClick={login} className="ms-2 fw-semibold">
-                        Entrar
-                    </ActionLink>
-                </div>
+                        <div className="text-center mt-4">
+                            <span className="text-secondary small">Já possui uma conta?</span>
+                            <ActionLink onClick={login} className="ms-2 fw-semibold">
+                                Entrar
+                            </ActionLink>
+                        </div>
+                    </>
+                )}
             </Auth>
         </>
     );
