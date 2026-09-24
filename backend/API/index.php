@@ -41,6 +41,6 @@ try {
 
 require_once __DIR__ . '/../router/Router.php';
 
-$router = new Router();
+$router = new Router($database);
 
 $router->run();

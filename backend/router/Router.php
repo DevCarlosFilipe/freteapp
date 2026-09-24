@@ -1,13 +1,16 @@
 <?php
 
 require_once __DIR__ . '/../controllers/AuthController.php';
+require_once __DIR__ . '/../controllers/UsersController.php';
 
 class Router
 {
     private $routes = [];
+    private Database $database;
 
-    public function __construct()
+    public function __construct(Database $database)
     {
+        $this->database = $database;
         $this->registerControllers();
     }
 
@@ -16,6 +19,11 @@ class Router
         $this->registerController(
             'auth',
             AuthController::class
+        );
+
+        $this->registerController(
+            'users',
+            UsersController::class
         );
     }
 
@@ -60,7 +68,14 @@ class Router
 
         $route = $this->routes[$action];
 
-        $controller = new $route['controller']();
+        $reflection = new ReflectionClass($route['controller']);
+        $constructor = $reflection->getConstructor();
+
+        if ($constructor && $constructor->getNumberOfRequiredParameters() > 0) {
+            $controller = $reflection->newInstance($this->database);
+        } else {
+            $controller = $reflection->newInstance();
+        }
 
         $method = $route['method'];
 
