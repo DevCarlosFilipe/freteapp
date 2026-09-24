@@ -3,7 +3,7 @@
 return [
     'database' => [
         'host' => 'localhost',
-        'name' => '',
+        'name' => 'freteapp',
         'user' => 'root',
         'password' => '',
         'charset' => 'utf8mb4',

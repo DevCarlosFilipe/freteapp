@@ -21,6 +21,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit;
 }
 
+require_once __DIR__ . '/../database/Database.php';
+
+$config = require __DIR__ . '/../config/config.php';
+
+try {
+    $database = new Database($config);
+} catch (PDOException $exception) {
+    http_response_code(500);
+
+    echo json_encode([
+        'success' => false,
+        'message' => 'Não foi possível conectar ao banco de dados.',
+        'data' => null
+    ], JSON_UNESCAPED_UNICODE);
+
+    exit;
+}
+
 require_once __DIR__ . '/../router/Router.php';
 
 $router = new Router();
