@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import useAPI from "../hooks/api";
+import useAPI from "../hooks/useAPI";
 
 function getGreeting(hour) {
     if (hour >= 18) {

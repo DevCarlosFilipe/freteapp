@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 
 const API_HOST = typeof window !== "undefined"
     ? window.location.hostname
-    : "192.168.18.123";
+    : "192.168.18.123/freteapp";
 
-const API_URL = `http://${API_HOST}/freteapp/backend/api/`;
+const API_URL = `http://${API_HOST}/backend/api/`;
 
-function useApi(params = {}) {
+function useAPI(params = {}) {
     const enabled = params.enabled !== false;
     const onSuccess = params.onSuccess;
 
@@ -90,4 +90,4 @@ function useApi(params = {}) {
     };
 }
 
-export default useApi;
+export default useAPI;

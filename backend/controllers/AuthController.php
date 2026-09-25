@@ -16,17 +16,17 @@ class AuthController
     public function login($data)
     {
         $email = $data['email'] ?? null;
-        $senha = $data['senha'] ?? null;
+        $password = $data['password'] ?? null;
         $rememberMe = filter_var(
             $data['rememberMe'] ?? false,
             FILTER_VALIDATE_BOOLEAN
         );
 
-        if (!$email || !$senha) {
+        if (!$email || !$password) {
             Response::error(
                 'E-mail e senha são obrigatórios.',
                 [
-                    'field' => !$email ? 'email' : 'senha'
+                    'field' => !$email ? 'email' : 'password'
                 ]
             );
 
@@ -35,7 +35,7 @@ class AuthController
 
         $result = $this->authService->login(
             $email,
-            $senha,
+            $password,
             $rememberMe
         );
 
@@ -69,7 +69,7 @@ class AuthController
         $username = trim($data['username'] ?? '');
         $email = $data['email'] ?? null;
         $phone = $data['phone'] ?? '';
-        $senha = $data['senha'] ?? null;
+        $password = $data['password'] ?? null;
         $confirmPassword = $data['confirmPassword'] ?? null;
         $acceptTerms = filter_var(
             $data['acceptTerms'] ?? false,
@@ -85,27 +85,27 @@ class AuthController
             return;
         }
 
-        if (!$username || !$email || !$senha) {
+        if (!$username || !$email || !$password) {
             Response::error(
                 'Nome de usuário, e-mail e senha são obrigatórios.',
                 [
-                    'field' => !$username ? 'username' : (!$email ? 'email' : 'senha')
+                    'field' => !$username ? 'username' : (!$email ? 'email' : 'password')
                 ]
             );
 
             return;
         }
 
-        if (strlen($senha) < 6) {
+        if (strlen($password) < 6) {
             Response::error(
                 'A senha deve ter pelo menos 6 caracteres.',
-                ['field' => 'senha']
+                ['field' => 'password']
             );
 
             return;
         }
 
-        if ($senha !== $confirmPassword) {
+        if ($password !== $confirmPassword) {
             Response::error(
                 'As senhas não coincidem.',
                 ['field' => 'confirmPassword']
@@ -118,7 +118,7 @@ class AuthController
             $username,
             $email,
             $phone,
-            $senha
+            $password
         );
 
         if (!$result['success']) {

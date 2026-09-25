@@ -60,10 +60,10 @@ function Register({ login }) {
                             id="register-password"
                             label="Senha"
                             type="password"
-                            name="senha"
+                            name="password"
                             placeholder="Senha"
                             minLength={6}
-                            error={errorField === "senha" ? error : null}
+                            error={errorField === "password" ? error : null}
                             required
                         />
 

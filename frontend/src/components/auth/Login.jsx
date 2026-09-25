@@ -68,7 +68,7 @@ function Login({
                             Login realizado com sucesso!
                         </Alert>
                     )}
-                    
+
                     <Input
                         id="login-identifier"
                         label="E-mail, usuário ou telefone"
@@ -83,9 +83,9 @@ function Login({
                         id="login-password"
                         label="Senha"
                         type="password"
-                        name="senha"
+                        name="password"
                         placeholder="Senha"
-                        error={errorField === "senha" ? error : null}
+                        error={errorField === "password" ? error : null}
                     />
 
 

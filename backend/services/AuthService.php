@@ -14,7 +14,7 @@ class AuthService
         $this->connection = $database->connection();
     }
 
-    public function login($identifier, $senha, $rememberMe = false)
+    public function login($identifier, $password, $rememberMe = false)
     {
         /*
          * O identifier pode ser:
@@ -22,12 +22,12 @@ class AuthService
          * - e-mail
          * - telefone
          */
-        $identifierNormalizado = trim($identifier);
+        $normalizedIdentifier = trim($identifier);
 
-        $telefoneNormalizado = preg_replace(
+        $normalizedPhone = preg_replace(
             '/\D/',
             '',
-            $identifierNormalizado
+            $normalizedIdentifier
         );
 
         try {
@@ -41,9 +41,9 @@ class AuthService
             );
 
             $statement->execute([
-                'username' => $identifierNormalizado,
-                'email' => $identifierNormalizado,
-                'phone' => $telefoneNormalizado
+                'username' => $normalizedIdentifier,
+                'email' => $normalizedIdentifier,
+                'phone' => $normalizedPhone
             ]);
 
             $userData = $statement->fetch();
@@ -65,40 +65,40 @@ class AuthService
             ];
         }
 
-        if (!Password::verify($senha, $userData['password'])) {
+        if (!Password::verify($password, $userData['password'])) {
             return [
                 'success' => false,
                 'message' => 'Senha incorreta.',
-                'field' => 'senha',
+                'field' => 'password',
                 'user' => null
             ];
         }
 
-        $usuario = $this->createUserFromData($userData);
+        $user = $this->createUserFromData($userData);
 
         if (Session::checkAuth()) {
             Session::logout();
         }
 
         Session::login(
-            $usuario->getId(),
+            $user->getId(),
             $rememberMe,
             [
-                'id' => $usuario->getId(),
-                'name' => $usuario->getName(),
-                'username' => $usuario->getUsername(),
-                'email' => $usuario->getEmail()
+                'id' => $user->getId(),
+                'name' => $user->getName(),
+                'username' => $user->getUsername(),
+                'email' => $user->getEmail()
             ]
         );
 
         return [
             'success' => true,
             'message' => 'Login realizado com sucesso.',
-            'user' => $usuario
+            'user' => $user
         ];
     }
 
-    public function register($username, $email, $phone, $senha)
+    public function register($username, $email, $phone, $password)
     {
         $username = trim($username);
         $email = trim($email);
@@ -154,11 +154,11 @@ class AuthService
                 'last_name' => null,
                 'email' => $email,
                 'phone' => $phone,
-                'password' => Password::hash($senha),
+                'password' => Password::hash($password),
                 'token' => bin2hex(random_bytes(32))
             ]);
 
-            $usuario = new User(
+            $user = new User(
                 $this->connection->lastInsertId(),
                 $username,
                 $username,
@@ -176,20 +176,20 @@ class AuthService
         }
 
         Session::login(
-            $usuario->getId(),
+            $user->getId(),
             false,
             [
-                'id' => $usuario->getId(),
-                'name' => $usuario->getName(),
-                'username' => $usuario->getUsername(),
-                'email' => $usuario->getEmail()
+                'id' => $user->getId(),
+                'name' => $user->getName(),
+                'username' => $user->getUsername(),
+                'email' => $user->getEmail()
             ]
         );
 
         return [
             'success' => true,
             'message' => 'Cadastro realizado com sucesso.',
-            'user' => $usuario
+            'user' => $user
         ];
     }
 

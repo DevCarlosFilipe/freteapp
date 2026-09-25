@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react"
 import Auth from "../components/auth/Auth"
-import useAPI from "../hooks/api"
+import useAPI from "../hooks/useAPI"
 import styles from "../styles/Testes.module.css"
 
 import Input from "../components/layout/form/Input"
@@ -56,7 +56,7 @@ function Testes() {
                     id="login-password"
                     label="Senha"
                     type="password"
-                    name="senha"
+                    name="password"
                     placeholder="Senha"
                 />
                 <Button type="submit" variant="primary" size="lg" className="fw-semibold rounded-pill">

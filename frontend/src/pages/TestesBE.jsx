@@ -1,5 +1,5 @@
 import { useState } from "react"
-import useApi from "../hooks/api"
+import useAPI from "../hooks/useAPI"
 
 const exemplos = [
     { label: "Teste simples", params: { action: "teste" } },
@@ -9,7 +9,7 @@ const exemplos = [
 
 function TestesBE() {
     const [params, setParams] = useState({ action: "teste", method: "get" })
-    const { data, loading, error } = useApi(params)
+    const { data, loading, error } = useAPI(params)
 
     function handleSubmit(event) {
         event.preventDefault()
