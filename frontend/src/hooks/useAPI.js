@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
 
-const API_HOST = typeof window !== "undefined"
-    ? window.location.hostname
-    : "192.168.18.123/freteapp";
-
-const API_URL = `http://${API_HOST}/backend/api/`;
+const API_URL = import.meta.env.DEV
+    ? "/api/"
+    : "/freteapp/backend/api/";
 
 function useAPI(params = {}) {
     const enabled = params.enabled !== false;
