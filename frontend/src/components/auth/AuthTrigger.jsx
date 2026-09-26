@@ -52,6 +52,7 @@ function AuthTrigger({ children }) {
     }
 
     function login() {
+        open("login");
         setCheckVersion((version) => version + 1);
     }
 
