@@ -9,6 +9,8 @@ import Contact from './pages/Contact'
 import CitiesServed from './pages/CitiesServed'
 import Dashboard from './pages/Dashboard'
 import NotFound from './pages/NotFound'
+import ResetPassword from './pages/ResetPassword'
+import VerifyEmail from './pages/VerifyEmail'
 
 function App() {
 
@@ -23,6 +25,8 @@ function App() {
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/cities-served" element={<CitiesServed />} />
                 <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/reset-password" element={<ResetPassword />} />
+                <Route path="/verify-email" element={<VerifyEmail />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
         </BrowserRouter>
