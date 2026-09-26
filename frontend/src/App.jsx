@@ -8,9 +8,9 @@ import TestesBE from './pages/TestesBE'
 import Contact from './pages/Contact'
 import CitiesServed from './pages/CitiesServed'
 import Dashboard from './pages/Dashboard'
-import NotFound from './pages/NotFound'
 import ResetPassword from './pages/ResetPassword'
 import VerifyEmail from './pages/VerifyEmail'
+import NotFound from './pages/NotFound'
 
 function App() {
 

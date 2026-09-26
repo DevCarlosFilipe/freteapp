@@ -10,7 +10,9 @@ class AuthController
 
     public function __construct(Database $database)
     {
-        $this->authService = new AuthService($database);
+        $config = require __DIR__ . '/../config/config.php';
+
+        $this->authService = new AuthService($database, $config);
     }
 
     public function login($data)
@@ -161,5 +163,78 @@ class AuthController
         Response::success(
             $result['message']
         );
+    }
+
+    public function verifyEmail($data)
+    {
+        $token = $data['token'] ?? null;
+
+        $result = $this->authService->verifyEmail($token);
+
+        if (!$result['success']) {
+            Response::error($result['message']);
+            return;
+        }
+
+        Response::success($result['message']);
+    }
+
+    public function resendVerification($data)
+    {
+        $result = $this->authService->resendVerification();
+
+        if (!$result['success']) {
+            Response::error($result['message']);
+            return;
+        }
+
+        Response::success($result['message']);
+    }
+
+    public function forgotPassword($data)
+    {
+        $email = $data['email'] ?? null;
+
+        if (!$email) {
+            Response::error(
+                'Informe seu e-mail.',
+                ['field' => 'email']
+            );
+
+            return;
+        }
+
+        $result = $this->authService->requestPasswordReset($email);
+
+        Response::success($result['message']);
+    }
+
+    public function resetPassword($data)
+    {
+        $token = $data['token'] ?? null;
+        $password = $data['password'] ?? null;
+        $confirmPassword = $data['confirmPassword'] ?? null;
+
+        if ($password !== $confirmPassword) {
+            Response::error(
+                'As senhas não coincidem.',
+                ['field' => 'confirmPassword']
+            );
+
+            return;
+        }
+
+        $result = $this->authService->resetPassword($token, $password);
+
+        if (!$result['success']) {
+            Response::error(
+                $result['message'],
+                ['field' => $result['field'] ?? null]
+            );
+
+            return;
+        }
+
+        Response::success($result['message']);
     }
 }

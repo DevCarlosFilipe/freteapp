@@ -8,6 +8,7 @@ class User
     private $email;
     private $phone;
     private $password;
+    private $emailVerifiedAt;
 
     public function __construct(
         $id = null,
@@ -15,7 +16,8 @@ class User
         $username = null,
         $email = null,
         $phone = null,
-        $password = null
+        $password = null,
+        $emailVerifiedAt = null
     ) {
         $this->id = $id;
         $this->name = $name;
@@ -23,6 +25,7 @@ class User
         $this->email = $email;
         $this->phone = $phone;
         $this->password = $password;
+        $this->emailVerifiedAt = $emailVerifiedAt;
     }
 
     public function getId()
@@ -53,5 +56,15 @@ class User
     public function getPassword()
     {
         return $this->password;
+    }
+
+    public function getEmailVerifiedAt()
+    {
+        return $this->emailVerifiedAt;
+    }
+
+    public function isEmailVerified()
+    {
+        return $this->emailVerifiedAt !== null;
     }
 }
