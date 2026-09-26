@@ -14,8 +14,8 @@ return [
     'mail' => [
         'host' => 'sandbox.smtp.mailtrap.io',
         'port' => 2525,
-        'username' => 'SEU_USUARIO_MAILTRAP',
-        'password' => 'SUA_SENHA_MAILTRAP',
+        'username' => '1fff206c856379',
+        'password' => '1c11770edf9f66',
         'encryption' => 'tls',
         'from_address' => 'no-reply@freteapp.local',
         'from_name' => 'FreteApp',
