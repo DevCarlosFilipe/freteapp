@@ -1,0 +1,25 @@
+hr {
+    color : var(--color-gray-soft);
+}
+
+.clientLayout {
+    display: flex;
+    flex-direction: row;
+    min-height: 100vh;
+    justify-content: space-between;
+}
+
+.sidebar {
+    width: 280px;
+    background-color: var(--color-black);
+    color: var(--color-white);
+    padding: 20px;
+}
+
+.sidebarItem {
+    margin-bottom: 10px;
+}
+
+.sidebarItem i {
+    margin-right: 8px;
+}

@@ -42,8 +42,8 @@ function VerifyEmail() {
                 </>
             )}
 
-            <Link to="/dashboard" className="fw-semibold d-inline-block mt-3">
-                Ir para o painel
+            <Link to="/" className="fw-semibold d-inline-block mt-3">
+                Ir para o início
             </Link>
         </div>
     );

@@ -218,15 +218,17 @@ class AuthService
         $sessionUser = Session::getUser();
 
         $statement = $this->connection->prepare(
-            'SELECT email_verified_at FROM users WHERE id = :id LIMIT 1'
+            'SELECT first_name, email_verified_at FROM users WHERE id = :id LIMIT 1'
         );
         $statement->execute(['id' => Session::getUserId()]);
         $row = $statement->fetch();
+        $firstName = trim($row['first_name'] ?? '');
 
         return [
             'authenticated' => true,
             'user' => [
                 ...$sessionUser,
+                'firstName' => $firstName !== '' ? $firstName : null,
                 'emailVerified' => $row ? $row['email_verified_at'] !== null : false
             ]
         ];

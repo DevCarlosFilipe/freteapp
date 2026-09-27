@@ -39,6 +39,11 @@
 	color: #fff;
 }
 
+.nav-link.active {
+    background-color: var(--color-theme)!important;
+    color: #fff!important;
+}
+
 @media (prefers-reduced-motion: reduce) {
 	.app-action-button {
 		transition: none;

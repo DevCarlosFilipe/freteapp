@@ -15,10 +15,6 @@ body {
     color: #333;
 }
 
-#root {
-    background-color: var(--color-black);
-}
-
 .btn-primary,
 .btn-primary:hover,
 .btn-primary:focus,
