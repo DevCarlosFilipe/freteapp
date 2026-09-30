@@ -10,7 +10,7 @@ hr {
 }
 
 .sidebar {
-    width: 280px;
+    width: 225px;
     background-color: var(--color-black);
     color: var(--color-white);
     padding: 20px;
