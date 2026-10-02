@@ -3,10 +3,12 @@
     --color-light-theme: #1ffd0d1a;
     --color-black: #171c1f;
     --color-white: #ffffff;
+    --color-light-white: #f9f9f9;
     --color-gray: #f7f7f7;
     --color-gray-soft: #f9f9f9;
     --color-border-soft: #ececec;
     --color-light-transparent: #ffffff66;
+    --color-high-transparent: #ffffff0f;
 }
 
 body {
