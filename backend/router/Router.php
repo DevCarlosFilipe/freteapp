@@ -2,6 +2,8 @@
 
 require_once __DIR__ . '/../controllers/AuthController.php';
 require_once __DIR__ . '/../controllers/UsersController.php';
+require_once __DIR__ . '/../controllers/CitiesController.php';
+require_once __DIR__ . '/../controllers/OrdersController.php';
 
 class Router
 {
@@ -24,6 +26,16 @@ class Router
         $this->registerController(
             'users',
             UsersController::class
+        );
+
+        $this->registerController(
+            'cities',
+            CitiesController::class
+        );
+
+        $this->registerController(
+            'orders',
+            OrdersController::class
         );
     }
 
