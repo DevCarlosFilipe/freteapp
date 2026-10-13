@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Skeleton from "../../components/ui/Skeleton";
 import useAPI from "../../hooks/useAPI";
 
 function getGreeting(hour) {
@@ -12,6 +13,44 @@ function getGreeting(hour) {
     }
 
     return "Bom dia";
+}
+
+function DashboardSkeleton() {
+    return (
+        <div className="container py-5" role="status" aria-label="Carregando painel">
+            <span className="visually-hidden">Carregando seu painel...</span>
+            <div className="row g-4">
+                <div className="col-12">
+                    <div className="mb-4">
+                        <Skeleton width="5rem" height="0.75rem" className="mb-2" />
+                        <Skeleton width="min(24rem, 80vw)" height="2.25rem" className="d-block mb-2" />
+                        <Skeleton width="min(32rem, 90vw)" height="1rem" className="d-block" />
+                    </div>
+                </div>
+
+                {[0, 1, 2].map((item) => (
+                    <div className="col-md-4" key={item}>
+                        <div className="card h-100 border-0 shadow-sm">
+                            <div className="card-body">
+                                <Skeleton width="5rem" height="0.875rem" className="d-block mb-2" />
+                                <Skeleton width="10rem" height="1.5rem" className="d-block" />
+                            </div>
+                        </div>
+                    </div>
+                ))}
+
+                <div className="col-12">
+                    <div className="card border-0 shadow-sm">
+                        <div className="card-body">
+                            <Skeleton width="8rem" height="1.5rem" className="d-block mb-3" />
+                            <Skeleton width="100%" height="1rem" className="d-block mb-2" />
+                            <Skeleton width="85%" height="1rem" className="d-block" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
 }
 
 function Dashboard() {
@@ -36,6 +75,10 @@ function Dashboard() {
         return null;
     }
 
+    if (loading) {
+        return <DashboardSkeleton />;
+    }
+
     return (
         <div className="container py-5">
             <div className="row g-4">
@@ -45,12 +88,7 @@ function Dashboard() {
                             <p className="text-uppercase text-secondary mb-1" style={{ letterSpacing: "0.12em", fontSize: "0.75rem" }}>
                                 Painel
                             </p>
-                            <h1 className="fw-bold mb-2">
-                                {loading
-                                    ? "Carregando seu painel..."
-                                    : `${greeting}, ${firstName}!`
-                                }
-                            </h1>
+                            <h1 className="fw-bold mb-2">{`${greeting}, ${firstName}!`}</h1>
                             <p className="text-secondary mb-0">
                                 {error
                                     ? "Não foi possível consultar sua sessão agora."

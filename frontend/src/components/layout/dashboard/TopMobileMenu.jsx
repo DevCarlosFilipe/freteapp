@@ -1,4 +1,5 @@
 import Logo from "../header/Logo";
+import Skeleton from "../../ui/Skeleton";
 import useDashboardLogout from "./useDashboardLogout";
 import styles from "../css/Dashboard.module.css";
 
@@ -16,7 +17,9 @@ function TopMobileMenu({ visible }) {
                     disabled={logoutLoading}
                 >
                     <i className="bi bi-box-arrow-right" aria-hidden="true" />
-                    <span>{logoutLoading ? "Saindo..." : "Sair"}</span>
+                    {logoutLoading
+                        ? <Skeleton width="3.5rem" height="0.875rem" tone="dark" />
+                        : <span>Sair</span>}
                 </button>
                 {logoutError && <span className={styles.mobileMenuError} role="alert">Falha ao sair</span>}
             </div>

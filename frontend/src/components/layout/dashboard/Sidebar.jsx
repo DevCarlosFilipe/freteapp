@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Logo from "../header/Logo";
+import Skeleton from "../../ui/Skeleton";
 import styles from "../css/Dashboard.module.css";
 import SidebarItem from "./SidebarItem";
 import SidebarToggler from "./SidebarToggler";
@@ -26,11 +27,14 @@ function Sidebar() {
                 <SidebarItem link="/dashboard/addresses" text="Endereços" icon="geo-alt" collapsed={!isSidebarOpen} />
                 <SidebarItem link="/dashboard/profile" text="Perfil" icon="person" collapsed={!isSidebarOpen} />
                 <SidebarItem
-                    text={logoutLoading ? "Saindo..." : "Sair"}
+                    text={logoutLoading
+                        ? <Skeleton width="3.5rem" height="0.875rem" tone="dark" />
+                        : "Sair"}
                     icon="box-arrow-right"
                     onClick={logout}
                     disabled={logoutLoading}
                     collapsed={!isSidebarOpen}
+                    ariaLabel={logoutLoading ? "Saindo..." : "Sair"}
                 />
             </ul>
             {logoutError && isSidebarOpen && (
