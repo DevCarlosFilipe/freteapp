@@ -3,9 +3,9 @@ import Auth from "../components/auth/Auth"
 import useAPI from "../hooks/useAPI"
 import styles from "../styles/Testes.module.css"
 
-import Input from "../components/layout/form/Input"
-import Button from "../components/layout/form/Button"
-import Alert from "../components/layout/Alert"
+import Input from "../components/ui/form/Input"
+import Button from "../components/ui/form/Button"
+import Alert from "../components/ui/Alert"
 
 function Testes() {
     const [authCheckVersion, setAuthCheckVersion] = useState(0)

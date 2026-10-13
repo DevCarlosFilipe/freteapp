@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Logo from "../../header/Logo";
+import Logo from "../header/Logo";
 import styles from "../css/Dashboard.module.css";
 import SidebarItem from "./SidebarItem";
 import SidebarToggler from "./SidebarToggler";

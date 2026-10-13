@@ -3,11 +3,11 @@ import { useNavigate } from "react-router-dom";
 
 import Auth from "./Auth";
 
-import Input from "../layout/form/Input";
-import Button from "../layout/form/Button";
-import ActionLink from "../layout/form/ActionLink";
-import CheckBox from "../layout/form/CheckBox";
-import Alert from "../layout/Alert";
+import Input from "../ui/form/Input";
+import Button from "../ui/form/Button";
+import ActionLink from "../ui/form/ActionLink";
+import CheckBox from "../ui/form/CheckBox";
+import Alert from "../ui/Alert";
 
 
 function Login({

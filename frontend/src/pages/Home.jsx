@@ -1,9 +1,9 @@
-import Footer from '../components/footer/Footer'
-import Header from '../components/header/Header'
-import Hero from '../components/layout/hero/Hero'
-import ColItem from '../components/layout/section/ColItem'
-import Section from '../components/layout/section/Section'
-import Testimonial from '../components/layout/section/Testimonial'
+import Footer from '../components/layout/footer/Footer'
+import Header from '../components/layout/header/Header'
+import Hero from '../components/home/hero/Hero'
+import ColItem from '../components/home/section/ColItem'
+import Section from '../components/home/section/Section'
+import Testimonial from '../components/home/section/Testimonial'
 
 function Home () {
     return (

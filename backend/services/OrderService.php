@@ -8,9 +8,21 @@ class OrderService
     private PDO $connection;
 
     private const REQUIRED_FIELDS = [
-        'originCityId', 'originStreet', 'originNumber', 'originNeighborhood', 'originZip',
-        'destinationCityId', 'destinationStreet', 'destinationNumber', 'destinationNeighborhood', 'destinationZip',
-        'weight', 'length', 'width', 'height', 'pickupDate'
+        'originCityId',
+        'originStreet',
+        'originNumber',
+        'originNeighborhood',
+        'originZip',
+        'destinationCityId',
+        'destinationStreet',
+        'destinationNumber',
+        'destinationNeighborhood',
+        'destinationZip',
+        'weight',
+        'length',
+        'width',
+        'height',
+        'pickupDate'
     ];
 
     public function __construct(Database $database)
@@ -156,6 +168,7 @@ class OrderService
                 'id' => (int) $row['id'],
                 'code' => $row['code'],
                 'status' => $row['status'],
+                'isHistory' => OrderStatus::isTerminal($row['status']),
                 'route' => ($origin['city'] ?? '?') . ' → ' . ($destination['city'] ?? '?'),
                 'estimatedDeliveryAt' => $row['estimated_delivery_at'],
                 'requestedPickupDate' => $row['requested_pickup_date']

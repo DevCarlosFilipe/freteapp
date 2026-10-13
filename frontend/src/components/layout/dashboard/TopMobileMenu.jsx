@@ -1,4 +1,4 @@
-import Logo from "../../header/Logo";
+import Logo from "../header/Logo";
 import useDashboardLogout from "./useDashboardLogout";
 import styles from "../css/Dashboard.module.css";
 

@@ -1,9 +1,9 @@
 import { useSearchParams, Link } from "react-router-dom";
 
 import Auth from "../components/auth/Auth";
-import Input from "../components/layout/form/Input";
-import Button from "../components/layout/form/Button";
-import Alert from "../components/layout/Alert";
+import Input from "../components/ui/form/Input";
+import Button from "../components/ui/form/Button";
+import Alert from "../components/ui/Alert";
 
 function ResetPassword() {
     const [searchParams] = useSearchParams();
