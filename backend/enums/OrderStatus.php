@@ -20,6 +20,7 @@ class OrderStatus
     public const NEARBY = 'nearby';
     public const DELIVERED = 'delivered';
     public const CANCELLED = 'cancelled';
+    public const RETURNED = 'returned';
 
     private const LABELS = [
         self::PENDING_REVIEW => 'Em análise',
@@ -30,6 +31,7 @@ class OrderStatus
         self::NEARBY => 'Chegando',
         self::DELIVERED => 'Entregue',
         self::CANCELLED => 'Cancelado',
+        self::RETURNED => 'Devolvido',
     ];
 
     // Status que não devem mais mudar depois de alcançados.
@@ -37,6 +39,7 @@ class OrderStatus
         self::REJECTED,
         self::DELIVERED,
         self::CANCELLED,
+        self::RETURNED,
     ];
 
     public static function all(): array

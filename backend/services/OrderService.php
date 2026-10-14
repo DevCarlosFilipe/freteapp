@@ -8,21 +8,10 @@ class OrderService
     private PDO $connection;
 
     private const REQUIRED_FIELDS = [
-        'originCityId',
-        'originStreet',
-        'originNumber',
-        'originNeighborhood',
-        'originZip',
-        'destinationCityId',
-        'destinationStreet',
-        'destinationNumber',
-        'destinationNeighborhood',
-        'destinationZip',
-        'weight',
-        'length',
-        'width',
-        'height',
-        'pickupDate'
+        'originCityId', 'originStreet', 'originNumber', 'originNeighborhood', 'originZip',
+        'destinationCityId', 'destinationStreet', 'destinationNumber', 'destinationNeighborhood', 'destinationZip',
+        'destinationRecipientName', 'destinationRecipientPhone',
+        'weight', 'length', 'width', 'height', 'pickupDate'
     ];
 
     public function __construct(Database $database)
@@ -75,6 +64,12 @@ class OrderService
 
                 $originSnapshot = $this->buildAddressSnapshot($orderData, 'origin', $originCity);
                 $destinationSnapshot = $this->buildAddressSnapshot($orderData, 'destination', $destinationCity);
+
+                // Quem vai receber a encomenda não é necessariamente quem está
+                // logado (client_id) — por isso entra como dado da entrega,
+                // dentro do snapshot de destino, não como coluna fixa.
+                $destinationSnapshot['recipientName'] = $orderData['destinationRecipientName'];
+                $destinationSnapshot['recipientPhone'] = $orderData['destinationRecipientPhone'];
 
                 $statement = $this->connection->prepare(
                     'INSERT INTO orders
@@ -152,7 +147,7 @@ class OrderService
     public function listForClient($clientId)
     {
         $statement = $this->connection->prepare(
-            'SELECT id, code, status, origin_snapshot, destination_snapshot,
+            'SELECT id, code, status, price, origin_snapshot, destination_snapshot,
                     estimated_delivery_at, requested_pickup_date, created_at
              FROM orders
              WHERE client_id = :client_id
@@ -169,7 +164,11 @@ class OrderService
                 'code' => $row['code'],
                 'status' => $row['status'],
                 'isHistory' => OrderStatus::isTerminal($row['status']),
-                'route' => ($origin['city'] ?? '?') . ' → ' . ($destination['city'] ?? '?'),
+                'price' => $row['price'],
+                'recipientName' => $destination['recipientName'] ?? null,
+                'recipientPhone' => $destination['recipientPhone'] ?? null,
+                'originLabel' => trim(($origin['city'] ?? '?') . ' - ' . ($origin['state'] ?? '')),
+                'destinationLabel' => trim(($destination['city'] ?? '?') . ' - ' . ($destination['state'] ?? '')),
                 'estimatedDeliveryAt' => $row['estimated_delivery_at'],
                 'requestedPickupDate' => $row['requested_pickup_date']
             ];
