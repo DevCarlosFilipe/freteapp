@@ -88,7 +88,7 @@ function Dashboard() {
                             <p className="text-uppercase text-secondary mb-1" style={{ letterSpacing: "0.12em", fontSize: "0.75rem" }}>
                                 Painel
                             </p>
-                            <h1 className="fw-bold mb-2">{`${greeting}, ${firstName}!`}</h1>
+                            <h1 className="fw-bold mb-0">{`${greeting}, ${firstName}!`}</h1>
                             <p className="text-secondary mb-0">
                                 {error
                                     ? "Não foi possível consultar sua sessão agora."

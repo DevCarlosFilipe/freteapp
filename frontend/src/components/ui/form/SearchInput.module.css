@@ -1,0 +1,38 @@
+.searchInput {
+    width: 27rem;
+    max-width: 100%;
+}
+
+.searchInput :global(.form-control) {
+    height: 40px;
+    min-height: 40px;
+    padding: 0.5rem 0.75rem 0.5rem 2.4rem;
+    border-color: #dfe4e8;
+    border-radius: 0.5rem;
+    background-color: #fff;
+    box-shadow: 0 1px 2px rgb(16 24 40 / 5%);
+    font-size: 0.875rem;
+}
+
+.searchInput :global(.form-control):focus {
+    border-color: #b9c7d3;
+    box-shadow: 0 0 0 0.15rem rgb(92 120 143 / 12%);
+}
+
+.searchInput > :global(label) {
+    padding: 0.5rem 0.75rem 0.5rem 2.4rem;
+    color: #74808b;
+    font-size: 0.875rem;
+}
+
+.searchInputIcon {
+    position: absolute;
+    top: 50%;
+    left: 0.8rem;
+    z-index: 4;
+    color: #8293a3;
+    font-size: 0.875rem;
+    line-height: 1;
+    pointer-events: none;
+    transform: translateY(-50%);
+}

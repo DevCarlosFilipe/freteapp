@@ -1,3 +1,6 @@
+import SearchInput from "../../components/ui/form/SearchInput";
+import OrderFilters from "../../components/orders/OrderFilters";
+
 function Orders() {
     return (
         <div className="container py-5">
@@ -8,13 +11,17 @@ function Orders() {
                             <p className="text-uppercase text-secondary mb-1" style={{ letterSpacing: "0.12em", fontSize: "0.75rem" }}>
                                 Painel
                             </p>
-                            <h1 className="fw-bold mb-2">Pedidos</h1>
+                            <h1 className="fw-bold mb-0">Pedidos</h1>
                             <p className="text-secondary mb-0">
                                 Acompanhe seus pedidos e entregas.
                             </p>
                         </div>
+                        <div>
+                            <SearchInput placeholder="Buscar por número do pedido, cliente ou destino..." />
+                        </div>
 
                     </div>
+                    <OrderFilters />
                 </div>
             </div>
         </div>
