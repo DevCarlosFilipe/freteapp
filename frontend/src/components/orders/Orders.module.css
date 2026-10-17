@@ -1,0 +1,22 @@
+.boxIcon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 1;
+    background-color: var(--color-theme);
+    color: var(--color-white);
+    border-radius: 50%;
+    font-size: 18pt;
+    width: 45px;
+    height: 45px;
+}
+
+.boxCount {
+    background-color: var(--color-light-theme);
+    color: var(--color-theme);
+    border-radius: 25px;
+    padding: 5px 15px;
+    margin-left: auto;
+    font-size: 9pt;
+    font-weight: 600;
+}

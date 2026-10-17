@@ -1,0 +1,16 @@
+.table {
+    border: 1px solid var(--color-border-soft);
+    font-size: 9pt;
+}
+
+.table thead {
+    background-color: var(--color-gray-soft);
+    color: var(--color-light-text);
+}
+
+.table th,
+.table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid var(--color-border-soft);
+}
