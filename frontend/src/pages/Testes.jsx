@@ -5,7 +5,7 @@ import styles from "../styles/Testes.module.css"
 
 import Input from "../components/ui/form/Input"
 import Button from "../components/ui/form/Button"
-import Alert from "../components/ui/Alert"
+import Alert from "../components/ui/form/Alert"
 
 function Testes() {
     const [authCheckVersion, setAuthCheckVersion] = useState(0)

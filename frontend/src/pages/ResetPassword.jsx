@@ -3,7 +3,7 @@ import { useSearchParams, Link } from "react-router-dom";
 import Auth from "../components/auth/Auth";
 import Input from "../components/ui/form/Input";
 import Button from "../components/ui/form/Button";
-import Alert from "../components/ui/Alert";
+import Alert from "../components/ui/form/Alert";
 
 function ResetPassword() {
     const [searchParams] = useSearchParams();

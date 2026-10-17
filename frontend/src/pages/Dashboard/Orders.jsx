@@ -1,5 +1,6 @@
 import SearchInput from "../../components/ui/form/SearchInput";
 import OrderFilters from "../../components/orders/OrderFilters";
+import OrderContent from "../../components/orders/OrderContent";
 
 function Orders() {
     return (
@@ -19,9 +20,9 @@ function Orders() {
                         <div>
                             <SearchInput placeholder="Buscar por número do pedido, cliente ou destino..." />
                         </div>
-
                     </div>
                     <OrderFilters />
+                    <OrderContent />
                 </div>
             </div>
         </div>

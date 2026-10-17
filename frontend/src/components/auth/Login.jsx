@@ -7,7 +7,7 @@ import Input from "../ui/form/Input";
 import Button from "../ui/form/Button";
 import ActionLink from "../ui/form/ActionLink";
 import CheckBox from "../ui/form/CheckBox";
-import Alert from "../ui/Alert";
+import Alert from "../ui/form/Alert";
 
 
 function Login({

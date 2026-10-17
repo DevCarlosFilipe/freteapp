@@ -1,7 +1,7 @@
 import Input from "../ui/form/Input";
 import Button from "../ui/form/Button";
 import ActionLink from "../ui/form/ActionLink";
-import Alert from "../ui/Alert";
+import Alert from "../ui/form/Alert";
 
 import Auth from "./Auth";
 
