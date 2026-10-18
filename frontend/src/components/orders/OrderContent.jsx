@@ -1,71 +1,86 @@
 import OrderSection from "./OrderSection";
+import OrdersTableColumns from "./OrdersTableColumns";
 
 function OrderContent() {
     const dataAndamento = [
         {
-            "# Pedido": "#000128",
-            Cliente: "João Silva · (11) 98765-4321",
-            "Origem → Destino": "São Paulo - SP → Rio de Janeiro - RJ",
-            Status: "Em rota",
-            Previsão: "Hoje, 14:30",
-            Valor: "R$ 120,00",
-            Ações: "Ver detalhes"
+            id: 128,
+            code: "000128",
+            recipientName: "João Silva",
+            recipientPhone: "(11) 98765-4321",
+            originLabel: "São Paulo - SP",
+            destinationLabel: "Rio de Janeiro - RJ",
+            status: "in_transit",
+            estimatedDeliveryAt: "2026-10-17 14:30:00",
+            price: 120
         },
         {
-            "# Pedido": "#000127",
-            Cliente: "Ana Costa · (21) 99876-5432",
-            "Origem → Destino": "Belo Horizonte - MG → São Paulo - SP",
-            Status: "Em rota",
-            Previsão: "Hoje, 18:00",
-            Valor: "R$ 250,00",
-            Ações: "Ver detalhes"
+            id: 127,
+            code: "000127",
+            recipientName: "Ana Costa",
+            recipientPhone: "(21) 99876-5432",
+            originLabel: "Belo Horizonte - MG",
+            destinationLabel: "São Paulo - SP",
+            status: "in_transit",
+            estimatedDeliveryAt: "2026-10-17 18:00:00",
+            price: 250
         },
         {
-            "# Pedido": "#000126",
-            Cliente: "Carlos Mendes · (31) 91234-5678",
-            "Origem → Destino": "Curitiba - PR → Florianópolis - SC",
-            Status: "Em análise",
-            Previsão: "Amanhã, 09:00",
-            Valor: "R$ 180,00",
-            Ações: "Ver detalhes"
+            id: 126,
+            code: "000126",
+            recipientName: "Carlos Mendes",
+            recipientPhone: "(31) 91234-5678",
+            originLabel: "Curitiba - PR",
+            destinationLabel: "Florianópolis - SC",
+            status: "pending_review",
+            estimatedDeliveryAt: "2026-10-18 09:00:00",
+            price: 180
         },
         {
-            "# Pedido": "#000125",
-            Cliente: "Fernanda Lima · (41) 99887-6655",
-            "Origem → Destino": "Porto Alegre - RS → São Paulo - SP",
-            Status: "Em rota",
-            Previsão: "Amanhã, 16:20",
-            Valor: "R$ 320,00",
-            Ações: "Ver detalhes"
+            id: 125,
+            code: "000125",
+            recipientName: "Fernanda Lima",
+            recipientPhone: "(41) 99887-6655",
+            originLabel: "Porto Alegre - RS",
+            destinationLabel: "São Paulo - SP",
+            status: "in_transit",
+            estimatedDeliveryAt: "2026-10-18 16:20:00",
+            price: 320
         }
     ];
     const dataFinalizados = [
         {
-            "# Pedido": "#000124",
-            Cliente: "Lucas Pereira · (21) 98765-43210",
-            "Origem → Destino": "Salvador - BA → Recife - PE",
-            Status: "Entregue",
-            Entrega: "12/05/2025 · 14:32",
-            Valor: "R$ 190,00",
-            Ações: "Ver detalhes"
+            id: 124,
+            code: "000124",
+            recipientName: "Lucas Pereira",
+            recipientPhone: "(21) 98765-43210",
+            originLabel: "Salvador - BA",
+            destinationLabel: "Recife - PE",
+            status: "delivered",
+            estimatedDeliveryAt: "2026-10-12 14:32:00",
+            price: 190
         },
         {
-            "# Pedido": "#000123",
-            Cliente: "Mariana Alves · (11) 98765-1234",
-            "Origem → Destino": "Brasília - DF → Goiânia - GO",
-            Status: "Entregue",
-            Entrega: "11/05/2025 · 10:15",
-            Valor: "R$ 220,00",
-            Ações: "Ver detalhes"
+            id: 123,
+            code: "000123",
+            recipientName: "Mariana Alves",
+            recipientPhone: "(11) 98765-1234",
+            originLabel: "Brasília - DF",
+            destinationLabel: "Goiânia - GO",
+            status: "delivered",
+            estimatedDeliveryAt: "2026-10-11 10:15:00",
+            price: 220
         },
         {
-            "# Pedido": "#000122",
-            Cliente: "Pedro Santos · (51) 99876-4321",
-            "Origem → Destino": "Porto Alegre - RS → Curitiba - PR",
-            Status: "Cancelado",
-            Entrega: "10/05/2025 · 16:45",
-            Valor: "R$ 160,00",
-            Ações: "Ver detalhes"
+            id: 122,
+            code: "000122",
+            recipientName: "Pedro Santos",
+            recipientPhone: "(51) 99876-4321",
+            originLabel: "Porto Alegre - RS",
+            destinationLabel: "Curitiba - PR",
+            status: "cancelled",
+            estimatedDeliveryAt: "2026-10-10 16:45:00",
+            price: 160
         }
     ];
     return (
@@ -75,12 +90,14 @@ function OrderContent() {
                     title="Pedidos em andamento"
                     icon="clock"
                     label="Pedidos que estão sendo analisados, em rota ou proximos da entrega "
+                    columns={OrdersTableColumns}
                     data={dataAndamento}
                 />
                 <OrderSection
                     title="Pedidos finalizados"
                     icon="check2"
                     label="Pedidos entregues, cancelados ou com outros status final"
+                    columns={OrdersTableColumns}
                     data={dataFinalizados}
                 />
             </div>

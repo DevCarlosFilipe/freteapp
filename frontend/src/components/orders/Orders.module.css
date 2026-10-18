@@ -20,3 +20,8 @@
     font-size: 9pt;
     font-weight: 600;
 }
+
+.boxTextIcon {
+    display: flex;
+    align-items: center;
+}

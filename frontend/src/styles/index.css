@@ -10,6 +10,32 @@
     --color-light-transparent: #ffffff66;
     --color-high-transparent: #ffffff0f;
     --color-light-text: #6c757d;
+
+    /* cores de status */
+
+    /* Positive — sucesso, confirmação */
+    --color-positive: #1987541A;
+    --color-positive-text: #329d3d;
+
+    /* Negative — erros, falhas, rejeições */
+    --color-negative: #DC35451A;
+    --color-negative-text: #DC3545;
+
+    /* Warning — atenção, pendências */
+    --color-warning: #FFC10726;
+    --color-warning-text: #997000;
+
+    /* Info — informações, análise */
+    --color-info: #0D6EFD1A;
+    --color-info-text: #0D6EFD;
+
+    /* Neutral — estados neutros */
+    --color-neutral: #6C757D1F;
+    --color-neutral-text: #5C636A;
+
+    /* Null — ausência de valor ou estado indefinido */
+    --color-null: #6C757D0D;
+    --color-null-text: #6C757D;
 }
 
 body {

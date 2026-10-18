@@ -1,7 +1,7 @@
 import styles from "./Orders.module.css";
 import Table from "../ui/Table";
 
-function OrderSection({ title, icon, label, data = [] }) {
+function OrderSection({ title, icon, label, columns = [], data = [] }) {
     function countOrders (data) {
         return data.length + " Pedidos";
     }
@@ -24,7 +24,7 @@ function OrderSection({ title, icon, label, data = [] }) {
                 </div>
             </div>
 
-            <Table columns={Object.keys(data[0] || {})} data={data} />
+            <Table columns={columns} data={data} />
 
         </div>
     );

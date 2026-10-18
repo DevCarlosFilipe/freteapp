@@ -8,17 +8,19 @@ function Table({ columns, data, caption }) {
             )}
             <thead>
                 <tr>
-                    {columns.map((column, index) => (
-                        <th key={index}>{column}</th>
+                    {columns.map((column) => (
+                        <th key={column.key}>{column.header}</th>
                     ))}
                 </tr>
             </thead>
 
             <tbody>
                 {data.map((row, rowIndex) => (
-                    <tr key={rowIndex}>
-                        {columns.map((column, colIndex) => (
-                            <td key={colIndex}>{row[column]}</td>
+                    <tr key={row.id ?? rowIndex}>
+                        {columns.map((column) => (
+                            <td key={column.key}>
+                                {column.render ? column.render(row) : row[column.key]}
+                            </td>
                         ))}
                     </tr>
                 ))}

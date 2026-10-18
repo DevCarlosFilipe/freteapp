@@ -1,0 +1,42 @@
+.pillBox {
+    border-radius: 25px;
+    padding: 5px 15px;
+    font-size: 9pt;
+    font-weight: 600;
+    width: fit-content;
+    display: flex;
+    justify-content: center;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+.positive {
+    background-color: var(--color-positive);
+    color: var(--color-positive-text);
+}
+
+.negative {
+    background-color: var(--color-negative);
+    color: var(--color-negative-text);
+}
+
+.warning {
+    background-color: var(--color-warning);
+    color: var(--color-warning-text);
+}
+
+.info {
+    background-color: var(--color-info);
+    color: var(--color-info-text);
+}
+
+.neutral {
+    background-color: var(--color-neutral);
+    color: var(--color-neutral-text);
+}
+
+.null {
+    background-color: var(--color-null);
+    color: var(--color-null-text);
+}
+
