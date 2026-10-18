@@ -1,9 +1,11 @@
 import styles from "./Orders.module.css";
 import Table from "../ui/Table";
+import PillBox from "../ui/PillBox";
 
 function OrderSection({ title, icon, label, columns = [], data = [] }) {
     function countOrders (data) {
-        return data.length + " Pedidos";
+        var order = data.length === 1 ? " Pedido" : " Pedidos";
+        return data.length + order;
     }
     return (
         <div className="card h-100 border-0 shadow-sm p-3 mb-4">
@@ -19,9 +21,7 @@ function OrderSection({ title, icon, label, columns = [], data = [] }) {
                         {label}
                     </p>
                 </div>
-                <div className={styles.boxCount}>
-                    <span>{countOrders(data)}</span>
-                </div>
+                <PillBox text={countOrders(data)} status="theme" className="ms-auto" />
             </div>
 
             <Table columns={columns} data={data} />

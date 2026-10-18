@@ -10,6 +10,11 @@
     align-items: center;
 }
 
+.theme {
+    background-color: var(--color-light-theme);
+    color: var(--color-theme);
+}
+
 .positive {
     background-color: var(--color-positive);
     color: var(--color-positive-text);

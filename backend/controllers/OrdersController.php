@@ -62,4 +62,30 @@ class OrdersController
 
         Response::success('Pedidos carregados.', ['orders' => $orders]);
     }
+
+    public function detail($data)
+    {
+        $userId = Session::getUserId();
+
+        if (!$userId) {
+            Response::error('Você precisa estar logado.');
+            return;
+        }
+
+        $orderId = $data['id'] ?? null;
+
+        if (!$orderId) {
+            Response::error('Pedido não informado.');
+            return;
+        }
+
+        $order = $this->orderService->getDetailForClient($userId, $orderId);
+
+        if (!$order) {
+            Response::error('Pedido não encontrado.');
+            return;
+        }
+
+        Response::success('Pedido carregado.', ['order' => $order]);
+    }
 }

@@ -175,6 +175,58 @@ class OrderService
         }, $statement->fetchAll());
     }
 
+    /**
+     * Pedido completo pra tela de detalhe, já com a timeline de status
+     * (a "rota simplificada" estilo Correios/Mercado Livre). O filtro
+     * por client_id garante que ninguém veja pedido de outra pessoa
+     * só adivinhando o id na URL.
+     */
+    public function getDetailForClient($clientId, $orderId)
+    {
+        $statement = $this->connection->prepare(
+            'SELECT * FROM orders WHERE id = :id AND client_id = :client_id LIMIT 1'
+        );
+        $statement->execute(['id' => $orderId, 'client_id' => $clientId]);
+        $row = $statement->fetch();
+
+        if (!$row) {
+            return null;
+        }
+
+        $historyStatement = $this->connection->prepare(
+            'SELECT status, note, created_at FROM order_status_history
+             WHERE order_id = :order_id ORDER BY created_at ASC'
+        );
+        $historyStatement->execute(['order_id' => $orderId]);
+
+        return [
+            'id' => (int) $row['id'],
+            'code' => $row['code'],
+            'status' => $row['status'],
+            'isHistory' => OrderStatus::isTerminal($row['status']),
+            'price' => $row['price'],
+            'weightKg' => $row['weight_kg'],
+            'lengthCm' => $row['length_cm'],
+            'widthCm' => $row['width_cm'],
+            'heightCm' => $row['height_cm'],
+            'hazardLevel' => $row['hazard_level'],
+            'declaredValue' => $row['declared_value'],
+            'origin' => json_decode($row['origin_snapshot'], true),
+            'destination' => json_decode($row['destination_snapshot'], true),
+            'requestedPickupDate' => $row['requested_pickup_date'],
+            'estimatedDeliveryAt' => $row['estimated_delivery_at'],
+            'deliveredAt' => $row['delivered_at'],
+            'createdAt' => $row['created_at'],
+            'history' => array_map(function ($entry) {
+                return [
+                    'status' => $entry['status'],
+                    'note' => $entry['note'],
+                    'createdAt' => $entry['created_at']
+                ];
+            }, $historyStatement->fetchAll())
+        ];
+    }
+
     private function validateOrder($orderData)
     {
         foreach (self::REQUIRED_FIELDS as $field) {
