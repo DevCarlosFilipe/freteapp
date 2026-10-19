@@ -1,104 +1,59 @@
 import OrderSection from "./OrderSection";
-import OrdersTableColumns from "./OrdersTableColumns";
+import OrdersEmptyState from "./OrdersEmptyState";
+import ordersColumns from "./OrdersTableColumns";
+import OrderSectionSkeleton from "./OrderSectionSkeleton";
+import useAPI from "../../hooks/useAPI";
+
 
 function OrderContent() {
-    const dataAndamento = [
-        {
-            id: 128,
-            code: "000128",
-            recipientName: "João Silva",
-            recipientPhone: "(11) 98765-4321",
-            originLabel: "São Paulo - SP",
-            destinationLabel: "Rio de Janeiro - RJ",
-            status: "in_transit",
-            estimatedDeliveryAt: "2026-10-17 14:30:00",
-            price: 120
-        },
-        {
-            id: 127,
-            code: "000127",
-            recipientName: "Ana Costa",
-            recipientPhone: "(21) 99876-5432",
-            originLabel: "Belo Horizonte - MG",
-            destinationLabel: "São Paulo - SP",
-            status: "in_transit",
-            estimatedDeliveryAt: "2026-10-17 18:00:00",
-            price: 250
-        },
-        {
-            id: 126,
-            code: "000126",
-            recipientName: "Carlos Mendes",
-            recipientPhone: "(31) 91234-5678",
-            originLabel: "Curitiba - PR",
-            destinationLabel: "Florianópolis - SC",
-            status: "pending_review",
-            estimatedDeliveryAt: "2026-10-18 09:00:00",
-            price: 180
-        },
-        {
-            id: 125,
-            code: "000125",
-            recipientName: "Fernanda Lima",
-            recipientPhone: "(41) 99887-6655",
-            originLabel: "Porto Alegre - RS",
-            destinationLabel: "São Paulo - SP",
-            status: "in_transit",
-            estimatedDeliveryAt: "2026-10-18 16:20:00",
-            price: 320
-        }
-    ];
-    const dataFinalizados = [
-        {
-            id: 124,
-            code: "000124",
-            recipientName: "Lucas Pereira",
-            recipientPhone: "(21) 98765-43210",
-            originLabel: "Salvador - BA",
-            destinationLabel: "Recife - PE",
-            status: "delivered",
-            estimatedDeliveryAt: "2026-10-12 14:32:00",
-            price: 190
-        },
-        {
-            id: 123,
-            code: "000123",
-            recipientName: "Mariana Alves",
-            recipientPhone: "(11) 98765-1234",
-            originLabel: "Brasília - DF",
-            destinationLabel: "Goiânia - GO",
-            status: "delivered",
-            estimatedDeliveryAt: "2026-10-11 10:15:00",
-            price: 220
-        },
-        {
-            id: 122,
-            code: "000122",
-            recipientName: "Pedro Santos",
-            recipientPhone: "(51) 99876-4321",
-            originLabel: "Porto Alegre - RS",
-            destinationLabel: "Curitiba - PR",
-            status: "cancelled",
-            estimatedDeliveryAt: "2026-10-10 16:45:00",
-            price: 160
-        }
-    ];
+    const { data, loading, error } = useAPI({
+        action: "orders.list",
+        method: "post"
+    });
+
+    if (loading) {
+        return (
+            <div role="status" aria-label="Carregando pedidos">
+                <span className="visually-hidden">Carregando seus pedidos...</span>
+                <OrderSectionSkeleton />
+                <OrderSectionSkeleton />
+            </div>
+        );
+    }
+
+    if (error || !data?.success || !Array.isArray(data?.data?.orders)) {
+        return (
+            <div className="alert alert-danger" role="alert">
+                {error || data?.message || "Não foi possível carregar seus pedidos agora."}
+            </div>
+        );
+    }
+
+    const orders = data.data.orders;
+
+    if (orders.length === 0) {
+        return <OrdersEmptyState />;
+    }
+
+    const activeOrders = orders.filter((order) => !order.isHistory);
+    const finalizedOrders = orders.filter((order) => order.isHistory);
+
     return (
         <div className="tab-content" id="orderContent">
             <div className="tab-pane show active" id="ordersResume" role="tabpanel" aria-labelledby="pills-resume-tab" tabIndex="0">
                 <OrderSection
                     title="Pedidos em andamento"
                     icon="clock"
-                    label="Pedidos que estão sendo analisados, em rota ou proximos da entrega "
-                    columns={OrdersTableColumns}
-                    data={dataAndamento}
+                    label="Pedidos que estão sendo analisados, em rota ou próximos da entrega."
+                    columns={ordersColumns}
+                    data={activeOrders}
                 />
                 <OrderSection
                     title="Pedidos finalizados"
                     icon="check2"
-                    label="Pedidos entregues, cancelados ou com outros status final"
-                    columns={OrdersTableColumns}
-                    data={dataFinalizados}
+                    label="Pedidos entregues, cancelados ou com outro status final."
+                    columns={ordersColumns}
+                    data={finalizedOrders}
                 />
             </div>
             <div className="tab-pane" id="ordersFilter" role="tabpanel" aria-labelledby="pills-in-progress-tab" tabIndex="0">
@@ -106,7 +61,7 @@ function OrderContent() {
                     title="Filtro de pedidos"
                     icon="filter"
                     label="Aqui você pode filtrar seus pedidos."
-                    columns={OrdersTableColumns}
+                    columns={ordersColumns}
                     data={[]}
                 />
             </div>

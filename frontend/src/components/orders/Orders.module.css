@@ -39,3 +39,94 @@
 .btnAction i {
     margin: 0!important;
 }
+
+.emptyState {
+    display: flex;
+    min-height: 320px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 24px;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    background-color: #fff;
+    text-align: center;
+}
+
+.emptyStateIcon {
+    display: grid;
+    width: 64px;
+    height: 64px;
+    margin-bottom: 20px;
+    place-items: center;
+    border-radius: 50%;
+    background-color: var(--color-light-theme);
+    color: var(--color-theme);
+    font-size: 1.75rem;
+}
+
+.emptyStateTitle {
+    margin-bottom: 8px;
+    color: #273444;
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.emptyStateDescription {
+    max-width: 420px;
+    margin-bottom: 20px;
+    color: #6c757d;
+}
+
+.emptyStateAction {
+    gap: 8px;
+    line-height: 1.2;
+}
+
+.ordersSkeletonSection {
+    min-width: 0;
+}
+
+.ordersSkeletonHeading {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.ordersSkeletonTitle {
+    display: flex;
+    min-width: 0;
+    flex: 1;
+    flex-direction: column;
+}
+
+.ordersSkeletonCount {
+    flex: 0 0 auto;
+}
+
+.ordersSkeletonTable {
+    overflow-x: auto;
+}
+
+.ordersSkeletonRow {
+    display: grid;
+    min-width: 680px;
+    grid-template-columns: 0.8fr 1.25fr 1.5fr 0.9fr 1fr 0.8fr 1fr;
+    align-items: center;
+    gap: 12px;
+    min-height: 48px;
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--color-border-soft);
+}
+
+@media (max-width: 575.98px) {
+    .emptyState {
+        min-height: 280px;
+        padding: 32px 18px;
+    }
+
+    .emptyStateAction {
+        width: 100%;
+    }
+}
