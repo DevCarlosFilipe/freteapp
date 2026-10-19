@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Logo from "../header/Logo";
 import Skeleton from "../../ui/Skeleton";
-import styles from "../css/Dashboard.module.css";
+import styles from "./css/Dashboard.module.css";
 import SidebarItem from "./SidebarItem";
 import SidebarToggler from "./SidebarToggler";
 import useDashboardLogout from "./useDashboardLogout";

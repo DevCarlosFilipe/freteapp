@@ -1,8 +1,34 @@
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
+import md5 from "blueimp-md5";
 import Skeleton from "../../ui/Skeleton";
 import useAPI from "../../../hooks/useAPI";
 import useDashboardLogout from "./useDashboardLogout";
-import styles from "../css/Dashboard.module.css";
+import styles from "./css/Dashboard.module.css";
+
+function GravatarAvatar({ email }) {
+    const normalizedEmail = typeof email === "string" ? email.trim().toLowerCase() : "";
+    const avatarUrl = normalizedEmail
+        ? `https://www.gravatar.com/avatar/${md5(normalizedEmail)}?d=404&s=72`
+        : null;
+    const [hasAvatar, setHasAvatar] = useState(false);
+
+    return (
+        <span className={styles.topbarAvatar}>
+            {!hasAvatar && <i className="bi bi-person" aria-hidden="true" />}
+            {avatarUrl && (
+                <img
+                    src={avatarUrl}
+                    alt=""
+                    className={`${styles.topbarAvatarImage} ${hasAvatar ? styles.topbarAvatarImageLoaded : ""}`}
+                    referrerPolicy="no-referrer"
+                    onLoad={() => setHasAvatar(true)}
+                    onError={() => setHasAvatar(false)}
+                />
+            )}
+        </span>
+    );
+}
 
 function DashboardTopbar() {
     const { data, loading, error } = useAPI({
@@ -27,9 +53,7 @@ function DashboardTopbar() {
 
             <details className={styles.topbarAccount}>
                 <summary className={styles.topbarAccountButton} aria-label={`Menu da conta de ${userName}`}>
-                    <span className={styles.topbarAvatar} aria-hidden="true">
-                        <i className="bi bi-person" />
-                    </span>
+                    <GravatarAvatar key={user?.email || "no-email"} email={user?.email} />
                     <span className={styles.topbarAccountText}>
                         <span className={styles.topbarAccountName}>
                             {loading

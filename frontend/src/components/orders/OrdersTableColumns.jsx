@@ -65,8 +65,10 @@ const ordersColumns = [
         key: "actions",
         header: "Ações",
         render: (order) => (
-            <Link to={`/dashboard/orders/${order.id}`}>
-                Ver detalhes <i className="bi bi-chevron-right"></i>
+            <Link to={`/dashboard/orders/${order.id}`} className={`btn btn-sm btn-light ${styles.btnAction}`}>
+                <i className="bi bi-eye"></i>
+                Ver detalhes
+                <i className="bi bi-chevron-right ms-1"></i>
             </Link>
         )
     }

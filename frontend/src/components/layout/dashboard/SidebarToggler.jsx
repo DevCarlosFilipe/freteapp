@@ -1,4 +1,4 @@
-import styles from "../css/Dashboard.module.css";
+import styles from "./css/Dashboard.module.css";
 
 function SidebarToggler({ isOpen, toggleSidebar }) {
     return (

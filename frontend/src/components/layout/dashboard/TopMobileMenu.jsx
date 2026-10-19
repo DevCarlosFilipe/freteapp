@@ -1,7 +1,7 @@
 import Logo from "../header/Logo";
 import Skeleton from "../../ui/Skeleton";
 import useDashboardLogout from "./useDashboardLogout";
-import styles from "../css/Dashboard.module.css";
+import styles from "./css/Dashboard.module.css";
 
 function TopMobileMenu({ visible }) {
     const { logout, logoutLoading, logoutError } = useDashboardLogout();

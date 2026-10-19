@@ -4,7 +4,7 @@ import OrderContent from "../../components/orders/OrderContent";
 
 function Orders() {
     return (
-        <div className="container py-5">
+        <div className="container">
             <div className="row g-4">
                 <div className="col-12">
                     <div className="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-4">

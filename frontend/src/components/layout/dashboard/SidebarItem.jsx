@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import styles from "../css/Dashboard.module.css";
+import styles from "./css/Dashboard.module.css";
 
 function SidebarItem({ link = "/dashboard", text = "Link", icon = null, onClick, disabled = false, collapsed = false, ariaLabel }) {
     const accessibleLabel = ariaLabel || (typeof text === "string" ? text : undefined);

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import BottomMobileMenu from "./BottomMobileMenu";
 import TopMobileMenu from "./TopMobileMenu";
-import styles from "../css/Dashboard.module.css";
+import styles from "./css/Dashboard.module.css";
 
 function SidebarMobile() {
 	const [menusVisible, setMenusVisible] = useState(true);

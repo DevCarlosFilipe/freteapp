@@ -106,6 +106,7 @@ function OrderContent() {
                     title="Filtro de pedidos"
                     icon="filter"
                     label="Aqui você pode filtrar seus pedidos."
+                    columns={OrdersTableColumns}
                     data={[]}
                 />
             </div>
