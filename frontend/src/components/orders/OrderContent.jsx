@@ -1,6 +1,6 @@
 import OrderSection from "./OrderSection";
 import OrdersEmptyState from "./OrdersEmptyState";
-import ordersColumns from "./OrdersTableColumns";
+import { ordersColumns } from "./OrdersTableColumns";
 import OrderSectionSkeleton from "./OrderSectionSkeleton";
 import useAPI from "../../hooks/useAPI";
 
