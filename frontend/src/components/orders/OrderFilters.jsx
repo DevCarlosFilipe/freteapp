@@ -1,6 +1,7 @@
 import NavPillsButton from "../ui/NavPillsButton";
 
-function OrderFilters() {
+function OrderFilters({ orders = [] }) {
+    const orderFilters = orders.filter((order) => !order.isHistory);
     return (
         <ul className="nav nav-pills mb-3" id="pills-tab" role="tablist">
             <NavPillsButton text="Todos" icon="list" id="pills-resume-tab" dataBsTarget="#ordersResume" active={true} />

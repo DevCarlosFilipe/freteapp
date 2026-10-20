@@ -1,5 +1,5 @@
 import styles from "./Orders.module.css";
-import Table from "../ui/Table";
+import Table from "../ui/table/Table";
 import PillBox from "../ui/PillBox";
 
 function OrderSection({ title, icon, label, columns = [], data = [] }) {
