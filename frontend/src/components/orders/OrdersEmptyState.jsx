@@ -1,12 +1,11 @@
 import { Link } from "react-router-dom";
 import styles from "./Orders.module.css";
+import BoxIcon from "../ui/BoxIcon";
 
 function OrdersEmptyState() {
     return (
         <section className={styles.emptyState} aria-labelledby="orders-empty-title">
-            <div className={styles.emptyStateIcon} aria-hidden="true">
-                <i className="bi bi-box-seam" />
-            </div>
+            <BoxIcon icon="box-seam" className={styles.emptyStateIcon} />
             <h2 className={styles.emptyStateTitle} id="orders-empty-title">
                 Sua primeira entrega começa aqui
             </h2>

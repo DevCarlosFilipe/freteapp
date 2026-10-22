@@ -1,0 +1,12 @@
+.boxIcon {
+    display: grid;
+    width: 56px;
+    height: 56px;
+    flex: 0 0 auto;
+    place-items: center;
+    border-radius: 50%;
+    background-color: var(--color-light-theme);
+    color: var(--color-theme);
+    font-size: 1.5rem;
+    line-height: 1;
+}

@@ -25,3 +25,40 @@
     font-size: 13pt;
     line-height: 1;
 }
+
+.emptyState {
+    display: flex;
+    min-height: 220px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 20px;
+    border: 1px dashed var(--color-border-soft);
+    border-radius: 8px;
+    background: linear-gradient(135deg, var(--color-white), var(--color-gray-soft));
+    text-align: center;
+}
+
+.icon {
+    margin-bottom: 16px;
+}
+
+.title {
+    margin: 0 0 6px;
+    color: #273444;
+    font-size: 1.05rem;
+    font-weight: 700;
+}
+
+.description {
+    margin: 0;
+    color: var(--color-light-text);
+    font-size: 0.9rem;
+}
+
+@media (max-width: 575.98px) {
+    .emptyState {
+        min-height: 190px;
+        padding: 28px 16px;
+    }
+}

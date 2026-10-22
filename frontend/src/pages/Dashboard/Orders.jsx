@@ -1,10 +1,14 @@
-import SearchInput from "../../components/ui/form/SearchInput";
+import { useState } from "react";
 import OrderFilters from "../../components/orders/OrderFilters";
 import OrderContent from "../../components/orders/OrderContent";
 import OrderSectionSkeleton from "../../components/orders/OrderSectionSkeleton";
 import useOrders from "../../hooks/useOrders";
+import OrderSearch from "../../components/orders/OrderSearch";
 
 function Orders() {
+    const [activeFilter, setActiveFilter] = useState("all");
+    const [activeTab, setActiveTab] = useState("ordersResume");
+    const [searchTerm, setSearchTerm] = useState("");
 
     const { orders, loading, error, success, message } = useOrders();
 
@@ -26,6 +30,22 @@ function Orders() {
         );
     }
 
+    const handleFilterChange = (filter) => {
+        setActiveFilter(filter);
+        setActiveTab(filter === "all" ? "ordersResume" : "ordersFilter");
+    };
+
+    const handleSearch = (value) => {
+        setSearchTerm(value);
+        setActiveTab(
+            value.trim()
+                ? "ordersSearch"
+                : activeFilter === "all"
+                    ? "ordersResume"
+                    : "ordersFilter"
+        );
+    };
+
     return (
         <div className="container">
             <div className="row g-4">
@@ -41,11 +61,16 @@ function Orders() {
                             </p>
                         </div>
                         <div>
-                            <SearchInput placeholder="Buscar por número do pedido, cliente ou destino..." />
+                            <OrderSearch value={searchTerm} onSearch={handleSearch} />
                         </div>
                     </div>
-                    <OrderFilters orders={orders} />
-                    <OrderContent orders={orders} />
+                    <OrderFilters activeFilter={activeFilter} onChange={handleFilterChange} />
+                    <OrderContent
+                        orders={orders}
+                        activeFilter={activeFilter}
+                        activeTab={activeTab}
+                        searchTerm={searchTerm}
+                    />
                 </div>
             </div>
         </div>

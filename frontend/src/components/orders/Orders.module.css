@@ -54,14 +54,9 @@
 }
 
 .emptyStateIcon {
-    display: grid;
     width: 64px;
     height: 64px;
     margin-bottom: 20px;
-    place-items: center;
-    border-radius: 50%;
-    background-color: var(--color-light-theme);
-    color: var(--color-theme);
     font-size: 1.75rem;
 }
 

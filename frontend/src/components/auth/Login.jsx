@@ -8,6 +8,7 @@ import Button from "../ui/form/Button";
 import ActionLink from "../ui/form/ActionLink";
 import CheckBox from "../ui/form/CheckBox";
 import Alert from "../ui/form/Alert";
+import BoxIcon from "../ui/BoxIcon";
 
 
 function Login({
@@ -32,18 +33,11 @@ function Login({
                     {success && <LoginRedirect navigate={navigate} />}
 
                     <div className="text-center mb-4">
-
-                        <div
-                            className="d-inline-flex align-items-center justify-content-center rounded-circle mb-3"
-                            style={{
-                                width: "64px",
-                                height: "64px",
-                                backgroundColor: "var(--color-light-theme)",
-                                color: "var(--color-theme)"
-                            }}
-                        >
-                            <i className="bi bi-person-lock fs-3"></i>
-                        </div>
+                        <BoxIcon
+                            icon="person-lock"
+                            className="mx-auto mb-3 fs-3"
+                            style={{ width: "64px", height: "64px" }}
+                        />
 
                         <h2 className="fw-bold mb-1">
                             Entrar

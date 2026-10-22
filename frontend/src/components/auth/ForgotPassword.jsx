@@ -2,6 +2,7 @@ import Input from "../ui/form/Input";
 import Button from "../ui/form/Button";
 import ActionLink from "../ui/form/ActionLink";
 import Alert from "../ui/form/Alert";
+import BoxIcon from "../ui/BoxIcon";
 
 import Auth from "./Auth";
 
@@ -9,17 +10,11 @@ function ForgotPassword({ login }) {
     return (
         <>
             <div className="text-center mb-4">
-                <div
-                    className="d-inline-flex align-items-center justify-content-center rounded-circle mb-3"
-                    style={{
-                        width: "64px",
-                        height: "64px",
-                        backgroundColor: "var(--color-light-theme)",
-                        color: "var(--color-theme)"
-                    }}
-                >
-                    <i className="bi bi-shield-lock fs-3"></i>
-                </div>
+                <BoxIcon
+                    icon="shield-lock"
+                    className="mx-auto mb-3 fs-3"
+                    style={{ width: "64px", height: "64px" }}
+                />
                 <h2 className="fw-bold mb-1">Recuperar senha</h2>
                 <p className="text-secondary mb-0">Informe seu e-mail para receber o link de redefinição</p>
             </div>

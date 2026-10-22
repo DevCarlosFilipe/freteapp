@@ -1,6 +1,6 @@
 import styles from "./NavPillsButton.module.css";
 
-function NavPillsButton({ id, dataBsTarget, text, icon, active = false }) {
+function NavPillsButton({ id, dataBsTarget, text, icon, active = false, onClick }) {
     const iconName = typeof icon === "string" ? icon.trim() : "";
 
     return (
@@ -13,7 +13,8 @@ function NavPillsButton({ id, dataBsTarget, text, icon, active = false }) {
                 type="button" 
                 role="tab" 
                 aria-controls={dataBsTarget.replace(/^#/, "")} 
-                aria-selected={active}>
+                aria-selected={active}
+                onClick={onClick}>
 
                 {iconName && (
                     <i className={`bi bi-${iconName} ${styles.NavPillsButtonIcon}`} aria-hidden="true" />
