@@ -64,6 +64,7 @@ function OrderContent({ orders = [], activeFilter, activeTab = "ordersResume", s
                     title="Pesquisa de pedidos"
                     icon="search"
                     label="Resultados encontrados na pesquisa."
+                    limit={50}
                     columns={ordersColumns}
                     data={searchResults}
                 />
