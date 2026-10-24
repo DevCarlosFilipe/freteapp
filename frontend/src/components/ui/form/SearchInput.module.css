@@ -6,7 +6,7 @@
 .searchInput :global(.form-control) {
     height: 40px;
     min-height: 40px;
-    padding: 0.5rem 0.75rem 0.5rem 2.4rem;
+    padding: 0.5rem 2.4rem 0.5rem 2.4rem;
     border-color: #dfe4e8;
     border-radius: 0.5rem;
     background-color: #fff;
@@ -35,4 +35,32 @@
     line-height: 1;
     pointer-events: none;
     transform: translateY(-50%);
+}
+
+.clearButton {
+    position: absolute;
+    top: 50%;
+    right: 0.65rem;
+    z-index: 4;
+    display: grid;
+    width: 1.5rem;
+    height: 1.5rem;
+    padding: 0;
+    place-items: center;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: #8293a3;
+    cursor: pointer;
+    transform: translateY(-50%);
+}
+
+.clearButton:hover {
+    background-color: #f1f4f6;
+    color: #465563;
+}
+
+.clearButton:focus-visible {
+    outline: 2px solid #5c788f;
+    outline-offset: 2px;
 }

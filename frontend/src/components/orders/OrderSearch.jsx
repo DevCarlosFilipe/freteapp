@@ -10,6 +10,7 @@ function OrderSearch({ value, onSearch }) {
             placeholder="Buscar por número do pedido, cliente ou destino..."
             value={value}
             onChange={handleSearch}
+            onClear={() => onSearch("")}
         />
     );
 }
