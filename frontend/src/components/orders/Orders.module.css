@@ -1,5 +1,38 @@
+.filters {
+    overflow-x: auto;
+}
+
+.searchWrapper {
+    min-width: 0;
+    width: min(27rem, 100%);
+}
+
+.titleOrderSection {
+    display: grid;
+    min-width: 0;
+    grid-template-columns: 45px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.titleOrderSectionWithoutIcon {
+    grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.boxTitle {
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+.orderCount {
+    justify-self: end;
+    white-space: nowrap;
+}
+
 .boxIcon {
     display: flex;
+    flex: 0 0 45px;
     justify-content: center;
     align-items: center;
     line-height: 1;
@@ -123,5 +156,42 @@
 
     .emptyStateAction {
         width: 100%;
+    }
+}
+
+@media (max-width: 1030px) {
+    .filters {
+        flex-wrap: nowrap;
+    }
+
+    .filters > li {
+        flex: 0 0 auto;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .searchWrapper {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .titleOrderSection {
+        grid-template-columns: 45px minmax(0, 1fr);
+        column-gap: 0.75rem;
+        row-gap: 0.5rem;
+    }
+
+    .orderCount {
+        grid-column: 2;
+        justify-self: start;
+    }
+
+    .titleOrderSectionWithoutIcon {
+        grid-template-columns: minmax(0, 1fr) auto;
+    }
+
+    .titleOrderSectionWithoutIcon .orderCount {
+        grid-column: 1 / -1;
     }
 }

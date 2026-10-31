@@ -1,4 +1,12 @@
+.tableContainer {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    overflow-x: auto;
+}
+
 .table {
+    width: 100%;
     border: 1px solid var(--color-border-soft);
     font-size: 9pt;
 }
@@ -60,5 +68,11 @@
     .emptyState {
         min-height: 190px;
         padding: 28px 16px;
+    }
+}
+
+@media (max-width: 1030px) {
+    .table {
+        min-width: 1030px;
     }
 }

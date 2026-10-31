@@ -20,30 +20,32 @@ function Table({ columns, data, caption, limit = 10 }) {
 
     return (
         <>
-            <table className={styles.table}>
-                {caption && (
-                    <caption className={styles.caption}>{caption}</caption>
-                )}
-                <thead>
-                    <tr>
-                        {columns.map((column) => (
-                            <th key={column.key}>{column.header}</th>
-                        ))}
-                    </tr>
-                </thead>
-
-                <tbody>
-                    {displayedData.map((row, rowIndex) => (
-                        <tr key={row.id ?? startIndex + rowIndex}>
+            <div className={styles.tableContainer}>
+                <table className={styles.table}>
+                    {caption && (
+                        <caption className={styles.caption}>{caption}</caption>
+                    )}
+                    <thead>
+                        <tr>
                             {columns.map((column) => (
-                                <td key={column.key}>
-                                    {column.render ? column.render(row) : row[column.key]}
-                                </td>
+                                <th key={column.key}>{column.header}</th>
                             ))}
                         </tr>
-                    ))}
-                </tbody>
-            </table>
+                    </thead>
+
+                    <tbody>
+                        {displayedData.map((row, rowIndex) => (
+                            <tr key={row.id ?? startIndex + rowIndex}>
+                                {columns.map((column) => (
+                                    <td key={column.key}>
+                                        {column.render ? column.render(row) : row[column.key]}
+                                    </td>
+                                ))}
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
             {shouldPaginate && (
                 <TablePagination
                     currentPage={page}

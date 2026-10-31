@@ -4,6 +4,7 @@ import OrderContent from "../../components/orders/OrderContent";
 import OrderSectionSkeleton from "../../components/orders/OrderSectionSkeleton";
 import useOrders from "../../hooks/useOrders";
 import OrderSearch from "../../components/orders/OrderSearch";
+import styles from "../../components/orders/Orders.module.css";
 
 function Orders() {
     const [activeFilter, setActiveFilter] = useState("all");
@@ -47,7 +48,7 @@ function Orders() {
     };
 
     return (
-        <div className="container">
+        <div className="container-fluid">
             <div className="row g-4">
                 <div className="col-12">
                     <div className="d-flex align-items-center justify-content-between flex-wrap gap-3 mb-4">
@@ -60,7 +61,7 @@ function Orders() {
                                 Acompanhe seus pedidos e entregas.
                             </p>
                         </div>
-                        <div>
+                        <div className={styles.searchWrapper}>
                             <OrderSearch value={searchTerm} onSearch={handleSearch} />
                         </div>
                     </div>

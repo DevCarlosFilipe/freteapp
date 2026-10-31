@@ -1,8 +1,9 @@
 import NavPillsButton from "../ui/NavPillsButton";
+import styles from "./Orders.module.css";
 
 function OrderFilters({ activeFilter, onChange }) {
     return (
-        <ul className="nav nav-pills mb-3" id="pills-tab" role="tablist">
+        <ul className={`nav nav-pills mb-3 ${styles.filters}`} id="pills-tab" role="tablist">
             <NavPillsButton text="Todos" icon="list" id="pills-resume-tab" dataBsTarget="#ordersResume" active={activeFilter === "all"} onClick={() => onChange("all")} />
             <NavPillsButton text="Em andamento" icon="clock" id="pills-in-progress-tab" dataBsTarget="#ordersFilter" active={activeFilter === "in_progress"} onClick={() => onChange("in_progress")} />
             <NavPillsButton text="Entregues" icon="check2" id="pills-completed-tab" dataBsTarget="#ordersFilter" active={activeFilter === "finalized"} onClick={() => onChange("finalized")} />

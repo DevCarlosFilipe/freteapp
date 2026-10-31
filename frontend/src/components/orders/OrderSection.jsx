@@ -10,7 +10,7 @@ function OrderSection({ title, icon, label, columns = [], data = [], limit = 10 
 
     return (
         <div className="card h-100 border-0 shadow-sm p-3 mb-4">
-            <div className="d-flex align-items-center gap-3 mb-3">
+            <div className={`${styles.titleOrderSection} ${!icon ? styles.titleOrderSectionWithoutIcon : ""}`}>
                 {icon &&
                     <div className={styles.boxIcon}>
                         <i className={`bi bi-${icon}`}></i>
@@ -22,7 +22,7 @@ function OrderSection({ title, icon, label, columns = [], data = [], limit = 10 
                         {label}
                     </p>
                 </div>
-                <PillBox text={countOrders(data)} status="theme" className="ms-auto" />
+                <PillBox text={countOrders(data)} status="theme" className={styles.orderCount} />
             </div>
 
             <Table columns={columns} data={data} limit={limit} />
