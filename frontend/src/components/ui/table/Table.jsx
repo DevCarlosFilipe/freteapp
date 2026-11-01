@@ -34,21 +34,21 @@ function Table({ columns, data, caption, limit = 10 }) {
         <div className={styles.viewToggle} role="group" aria-label="Visualização da tabela">
             <button
                 type="button"
-                className={`${styles.viewToggleButton} ${!showMobileTable ? styles.viewToggleButtonActive : ""}`}
-                aria-label="Tabela completa"
-                aria-pressed={!showMobileTable}
-                onClick={() => setShowMobileTable(false)}
-            >
-                <i className="bi bi-table" aria-hidden="true"></i>
-            </button>
-            <button
-                type="button"
                 className={`${styles.viewToggleButton} ${showMobileTable ? styles.viewToggleButtonActive : ""}`}
                 aria-label="Tabela reduzida"
                 aria-pressed={showMobileTable}
                 onClick={() => setShowMobileTable(true)}
             >
                 <i className="bi bi-card-list" aria-hidden="true"></i>
+            </button>
+            <button
+                type="button"
+                className={`${styles.viewToggleButton} ${!showMobileTable ? styles.viewToggleButtonActive : ""}`}
+                aria-label="Tabela completa"
+                aria-pressed={!showMobileTable}
+                onClick={() => setShowMobileTable(false)}
+            >
+                <i className="bi bi-table" aria-hidden="true"></i>
             </button>
         </div>
     );

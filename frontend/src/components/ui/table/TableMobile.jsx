@@ -34,7 +34,7 @@ function TableMobile({ columns, data, caption, limit = 10 }) {
                                     {column.render ? column.render(row) : row[column.key]}
                                 </span>
                             </div>
-                        ))}
+                        ))} 
                     </article>
                 ))}
             </div>
